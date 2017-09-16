@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @template.title %>
+</p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @template.body %>
+</p>
+
+<p>
+  <strong>Sender:</strong>
+  <%= @template.sender %>
+</p>
+
+<%= link_to 'Edit', edit_template_path(@template) %> |
+<%= link_to 'Back', templates_path %>

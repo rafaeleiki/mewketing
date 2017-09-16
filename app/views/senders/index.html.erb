@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Senders</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>Password digest</th>
+      <th>Admin</th>
+      <th>Client</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @senders.each do |sender| %>
+      <tr>
+        <td><%= sender.email %></td>
+        <td><%= sender.password_digest %></td>
+        <td><%= sender.admin %></td>
+        <td><%= sender.client %></td>
+        <td><%= link_to 'Show', sender %></td>
+        <td><%= link_to 'Edit', edit_sender_path(sender) %></td>
+        <td><%= link_to 'Destroy', sender, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Sender', new_sender_path %>

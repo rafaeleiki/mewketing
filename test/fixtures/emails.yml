@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  schedule: 2017-09-15 22:04:21
+  title: MyString
+  body: MyString
+  sender: one
+  receiver: one
+  group: one
+
+two:
+  schedule: 2017-09-15 22:04:21
+  title: MyString
+  body: MyString
+  sender: two
+  receiver: two
+  group: two
