@@ -23,12 +23,7 @@
 
   <div class="field">
     <%= form.label :body %>
-    <%= form.text_field :body, id: :email_body %>
-  </div>
-
-  <div class="field">
-    <%= form.label :sender_id %>
-    <%= form.text_field :sender_id, id: :email_sender_id %>
+    <%= form.text_area :body, id: :email_body %>
   </div>
 
   <div class="field">
@@ -42,6 +37,6 @@
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit 'Enviar email' %>
   </div>
 <% end %>

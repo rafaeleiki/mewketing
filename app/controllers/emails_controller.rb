@@ -1,4 +1,6 @@
 class EmailsController < ApplicationController
+
+  before_action :authorize
   before_action :set_email, only: [:show, :edit, :update, :destroy]
 
   # GET /emails
@@ -25,6 +27,7 @@ class EmailsController < ApplicationController
   # POST /emails.json
   def create
     @email = Email.new(email_params)
+    @email.sender = user
 
     respond_to do |format|
       if @email.save
@@ -69,6 +72,6 @@ class EmailsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def email_params
-      params.require(:email).permit(:schedule, :title, :body, :sender_id, :receiver_id, :group_id)
+      params.require(:email).permit(:schedule, :title, :body, :receiver_id, :group_id)
     end
 end
