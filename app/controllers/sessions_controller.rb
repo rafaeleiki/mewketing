@@ -1,5 +1,4 @@
 class SessionsController < ApplicationController
-  before_action :authorize
 
   def new
   end
@@ -20,8 +19,5 @@ class SessionsController < ApplicationController
   end
 
   def not_admin
-  end
-
-  def not_user
   end
 end

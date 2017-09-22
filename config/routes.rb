@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   resources :templates
   resources :groups
   resources :receivers
-  resources :senders
+  resources :senders do
+    get :not_user, on: :collection
+  end
   resources :clients
 
   # Session
@@ -15,5 +17,4 @@ Rails.application.routes.draw do
   post '/login' => 'sessions#create'
   get '/logout' => 'sessions#destroy'
   get '/not_admin' => 'sessions#not_admin'
-  get '/not_user' => 'sessions#not_user'
 end
