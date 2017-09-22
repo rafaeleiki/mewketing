@@ -23,7 +23,7 @@
 
   <div class="field">
     <%= form.label :sender_id %>
-    <%= form.select :sender_id, options_for_select(Sender.all.map { |s| [s.name, s.id] }) %>
+    <%= form.select :sender_id, options_for_select(Receiver.all.map { |s| [s.name, s.id] }) %>
   </div>
 
   <div class="actions">
