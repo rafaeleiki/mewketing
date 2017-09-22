@@ -5,10 +5,17 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-client = Client.create({ name: 'MewKeting' })
-sender = Sender.create({
-    email: 'a@a.com',
-    password: '1234',
-    admin: true,
-    client: client
-})
+# client = Client.create({ name: 'MewKeting' })
+# sender = Sender.create({
+#     email: 'a@a.com',
+#     password: '1234',
+#     admin: true,
+#     client: client
+# })
+
+Sender.create({
+  email: 'b@b.com',
+  password: '1234',
+  admin: false,
+  client: Client.find(1)
+  })

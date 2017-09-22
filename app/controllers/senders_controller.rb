@@ -1,4 +1,6 @@
 class SendersController < ApplicationController
+  before_action :authorize
+  before_action :authorize_admin, only: [:new, :create, :destro]
   before_action :set_sender, only: [:show, :edit, :update, :destroy]
 
   # GET /senders
@@ -19,6 +21,13 @@ class SendersController < ApplicationController
 
   # GET /senders/1/edit
   def edit
+    if !current_user.admin && @sender.id != current_user.id
+      if !current_user.admin
+        redirect_to '/not_admin'
+      else
+        redirect_to '/not_user'
+      end
+    end
   end
 
   # POST /senders
@@ -40,6 +49,13 @@ class SendersController < ApplicationController
   # PATCH/PUT /senders/1
   # PATCH/PUT /senders/1.json
   def update
+    if !current_user.admin && @sender.id != current_user.id
+      if !current_user.admin
+        redirect_to '/not_admin'
+      else
+        redirect_to '/not_user'
+      end
+    end
     respond_to do |format|
       if @sender.update(sender_params)
         format.html { redirect_to @sender, notice: 'Sender was successfully updated.' }
