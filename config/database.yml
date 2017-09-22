@@ -23,6 +23,8 @@ default: &default
 
 development:
   <<: *default
+  port: <%= ENV["DATABASE_PORT"] || "5432" %>
+  host: <%= ENV["DATABASE_HOST"] || "localhost" %>
   database: <%= ENV["DATABASE"] %>
   user: <%= ENV["DATABASE_USER"] %>
   password: <%= ENV["DATABASE_PASSWORD"] %>
