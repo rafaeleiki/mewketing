@@ -17,7 +17,7 @@
       <tr>
         <td><%= template.title %></td>
         <td><%= template.body %></td>
-        <td><%= template.sender %></td>
+        <td><%= template.sender.email %></td>
         <td><%= link_to 'Show', template %></td>
         <td><%= link_to 'Edit', edit_template_path(template) %></td>
         <td><%= link_to 'Destroy', template, method: :delete, data: { confirm: 'Are you sure?' } %></td>

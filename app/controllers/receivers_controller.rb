@@ -1,10 +1,20 @@
 class ReceiversController < ApplicationController
-  before_action :set_receiver, only: [:show, :edit, :update, :destroy]
+
+  before_action :authorize
+  before_action :set_receiver, only: [:show, :edit, :update, :destroy, :add_to_group_show]
 
   # GET /receivers
   # GET /receivers.json
   def index
     @receivers = Receiver.all
+  end
+
+  def add_to_group_show
+      @group = current_user.groups
+  end
+
+  def add_to_group_update
+
   end
 
   # GET /receivers/1
@@ -25,6 +35,7 @@ class ReceiversController < ApplicationController
   # POST /receivers.json
   def create
     @receiver = Receiver.new(receiver_params)
+    @receiver.sender = current_user
 
     respond_to do |format|
       if @receiver.save

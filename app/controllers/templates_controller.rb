@@ -27,6 +27,7 @@ class TemplatesController < ApplicationController
   # POST /templates.json
   def create
     @template = Template.new(template_params)
+    @template.sender = current_user
 
     respond_to do |format|
       if @template.save
