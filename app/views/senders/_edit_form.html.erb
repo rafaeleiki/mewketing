@@ -17,8 +17,13 @@
   </div>
 
   <div class="field">
-    <%= form.label :password %>
-    <%= form.text_field :password, id: :sender_password %>
+    <%= form.label :old_password %>
+    <%= form.text_field :old_password, id: :old_password %>
+  </div>
+
+  <div class="field">
+    <%= form.label :new_password %>
+    <%= form.text_field :new_password, id: :new_password %>
   </div>
 
   <div class="field">
