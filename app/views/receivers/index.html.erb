@@ -17,10 +17,11 @@
       <tr>
         <td><%= receiver.name %></td>
         <td><%= receiver.email %></td>
-        <td><%= receiver.sender %></td>
+        <td><%= receiver.sender.email %></td>
         <td><%= link_to 'Show', receiver %></td>
         <td><%= link_to 'Edit', edit_receiver_path(receiver) %></td>
         <td><%= link_to 'Destroy', receiver, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Add to Group', add_to_group_receiver_path(receiver) %></td>
       </tr>
     <% end %>
   </tbody>
