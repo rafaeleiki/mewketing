@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def current_user
-    @current_user ||= Client.find(session[:sender_id]) if session[:sender_id]
+    @current_user ||= Sender.find(session[:sender_id]) if session[:sender_id]
   end
   helper_method :current_user
 
