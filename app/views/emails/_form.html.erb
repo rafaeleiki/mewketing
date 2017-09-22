@@ -28,12 +28,13 @@
 
   <div class="field">
     <%= form.label :receiver_id %>
-    <%= form.text_field :receiver_id, id: :email_receiver_id %>
+    <%= form.select :receiver_id, options_for_select(Receiver.all.map { |r| [r.name, r.id] }) %>
+
   </div>
 
   <div class="field">
     <%= form.label :group_id %>
-    <%= form.text_field :group_id, id: :email_group_id %>
+    <%= form.select :group_id, options_for_select(Group.all.map { |g| [g.name, g.id] }) %>
   </div>
 
   <div class="actions">
