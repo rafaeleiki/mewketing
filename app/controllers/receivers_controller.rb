@@ -10,11 +10,11 @@ class ReceiversController < ApplicationController
   end
 
   def add_to_group_show
-      @group = current_user.groups
+      @groups = current_user.groups
   end
 
   def add_to_group_update
-
+    @group_receivers = GroupReceiver.new(params)
   end
 
   # GET /receivers/1

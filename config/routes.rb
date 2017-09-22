@@ -6,9 +6,13 @@ Rails.application.routes.draw do
   resources :emails
   resources :templates
   resources :groups
+<<<<<<< Updated upstream
+  resources :receivers
+=======
   resources :receivers do
-    get :add_to_group, on: :member
+    get :add_to_group_show, on: :member
   end
+>>>>>>> Stashed changes
   resources :senders
   resources :clients
 
