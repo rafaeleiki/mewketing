@@ -12,3 +12,8 @@ sender = Sender.create({
     admin: true,
     client: client
 })
+receiver = Receiver.create({
+    name: 'Nano',
+    email: 'abba@meucoracao.com',
+    sender: sender
+})
