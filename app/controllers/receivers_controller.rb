@@ -36,6 +36,16 @@ class ReceiversController < ApplicationController
   def create
     @receiver = Receiver.new(receiver_params)
     @receiver.sender = current_user
+    @group = Group.new
+    @group.sender = current_user
+    @group.name = @receiver.name
+    @group.private = true
+    @group_receivers = GroupReceiver.new
+    @group_receivers.group = @group
+    @group_receivers.receiver = @receiver
+
+    @group.save
+    @group_receivers.save
 
     respond_to do |format|
       if @receiver.save
