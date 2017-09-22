@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170916005710) do
+ActiveRecord::Schema.define(version: 20170922191429) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,13 @@ ActiveRecord::Schema.define(version: 20170916005710) do
     t.index ["group_id"], name: "index_emails_on_group_id"
     t.index ["receiver_id"], name: "index_emails_on_receiver_id"
     t.index ["sender_id"], name: "index_emails_on_sender_id"
+  end
+
+  create_table "group_receivers", force: :cascade do |t|
+    t.bigint "groups_id"
+    t.bigint "receivers_id"
+    t.index ["groups_id"], name: "index_group_receivers_on_groups_id"
+    t.index ["receivers_id"], name: "index_group_receivers_on_receivers_id"
   end
 
   create_table "groups", force: :cascade do |t|
@@ -75,6 +82,8 @@ ActiveRecord::Schema.define(version: 20170916005710) do
   add_foreign_key "emails", "groups"
   add_foreign_key "emails", "receivers"
   add_foreign_key "emails", "senders"
+  add_foreign_key "group_receivers", "groups", column: "groups_id"
+  add_foreign_key "group_receivers", "receivers", column: "receivers_id"
   add_foreign_key "groups", "senders"
   add_foreign_key "receivers", "senders"
   add_foreign_key "senders", "clients"
