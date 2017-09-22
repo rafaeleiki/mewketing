@@ -3,6 +3,7 @@
   <header class="mdl-layout__header">
     <div class="mdl-layout__header-row">
       <div class="mdl-layout-spacer"></div>
+      <!--
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
                   mdl-textfield--floating-label mdl-textfield--align-right">
         <label class="mdl-button mdl-js-button mdl-button--icon"
@@ -13,16 +14,25 @@
           <input class="mdl-textfield__input" type="text" name="sample"
                  id="fixed-header-drawer-exp">
         </div>
-      </div>
+
+      </div>-->
+
     </div>
   </header>
   <div class="mdl-layout__drawer">
     <span class="mdl-layout-title">MewKeting</span>
     <nav class="mdl-navigation">
-      <a class="mdl-navigation__link" href="/receivers">Destinatários</a>
-      <a class="mdl-navigation__link" href="/groups">Grupos</a> 
+      <a class="mdl-navigation__link" href="/">Home</a>
+      <a class="mdl-navigation__link" href="/clients">Clients (Store)</a>
+      <a class="mdl-navigation__link" href="/senders">Senders</a>
+      <a class="mdl-navigation__link" href="/receivers">Receivers</a>
+      <a class="mdl-navigation__link" href="/groups">Groups</a>
       <a class="mdl-navigation__link" href="/templates">Templates</a>
-      <a class="mdl-navigation__link" href="/emails">email</a>
+      <a class="mdl-navigation__link" href="/emails">Emails</a>
+      <% if current_user %>
+      <a class="mdl-navigation__link" href="/logout">Logout</a>
+      <% end %>
+
     </nav>
   </div>
   <main class="mdl-layout__content">
