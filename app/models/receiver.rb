@@ -1,4 +1,5 @@
 class Receiver < ApplicationRecord
   belongs_to :sender
-  has_many :email_receivers, :dependent => :delete_all
+  has_many :group_receiver, :dependent => :delete_all
+  has_many :email_receiver, :dependent => :delete_all
 end
