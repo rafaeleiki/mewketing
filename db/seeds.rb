@@ -17,3 +17,8 @@ receiver = Receiver.create({
     email: 'abba@meucoracao.com',
     sender: sender
 })
+group = Group.create({
+    name: 'Gooooood',
+    private: true,
+    sender: sender
+})
