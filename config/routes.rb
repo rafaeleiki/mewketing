@@ -7,9 +7,8 @@ Rails.application.routes.draw do
   resources :templates
   resources :groups
   resources :receivers
-  resources :senders do
-    get :not_user, on: :collection
-  end
+  get '/senders/not_user' => 'senders#not_user'
+  resources :senders
   resources :clients
 
   # Session

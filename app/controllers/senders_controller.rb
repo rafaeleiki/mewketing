@@ -21,11 +21,9 @@ class SendersController < ApplicationController
 
   # GET /senders/1/edit
   def edit
-    if !current_user.admin && @sender.id != current_user.id
-      if !current_user.admin
-        redirect_to '/not_admin'
-      else
-        redirect_to '/not_user'
+    if !current_user.admin
+      if @sender.id != current_user.id
+        redirect_to '/senders/not_user'
       end
     end
   end
@@ -49,11 +47,11 @@ class SendersController < ApplicationController
   # PATCH/PUT /senders/1
   # PATCH/PUT /senders/1.json
   def update
-    if !current_user.admin && @sender.id != current_user.id
+    def edit
       if !current_user.admin
-        redirect_to '/not_admin'
-      else
-        redirect_to '/not_user'
+        if @sender.id != current_user.id
+          redirect_to '/senders/not_user'
+        end
       end
     end
     respond_to do |format|
