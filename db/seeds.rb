@@ -19,3 +19,10 @@ Sender.create({
   admin: false,
   client: Client.find(1)
   })
+
+Sender.create({
+  email: 'c@c.com',
+  password: '1234',
+  admin: false,
+  client: Client.find(1)
+  })
