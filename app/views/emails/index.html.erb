@@ -2,16 +2,13 @@
 
 <h1>Emails</h1>
 
-<table>
+<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
   <thead>
     <tr>
-      <th>Schedule</th>
-      <th>Title</th>
-      <th>Body</th>
-      <th>Sender</th>
-      <th>Receiver</th>
-      <th>Group</th>
-      <th colspan="3"></th>
+      <th class="mdl-data-table__cell--non-numeric">Schedule</th>
+      <th class="mdl-data-table__cell--non-numeric">Title</th>
+      <th class="mdl-data-table__cell--non-numeric">Sender</th>
+      <th class="mdl-data-table__cell--non-numeric" colspan="3"></th>
     </tr>
   </thead>
 
@@ -20,10 +17,7 @@
       <tr>
         <td><%= email.schedule %></td>
         <td><%= email.title %></td>
-        <td><%= email.body %></td>
-        <td><%= email.sender %></td>
-        <td><%= email.receiver %></td>
-        <td><%= email.group %></td>
+        <td><%= email.sender.name %></td>
         <td><%= link_to 'Show', email %></td>
         <td><%= link_to 'Edit', edit_email_path(email) %></td>
         <td><%= link_to 'Destroy', email, method: :delete, data: { confirm: 'Are you sure?' } %></td>

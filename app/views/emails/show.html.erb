@@ -20,15 +20,5 @@
   <%= @email.sender %>
 </p>
 
-<p>
-  <strong>Receiver:</strong>
-  <%= @email.receiver %>
-</p>
-
-<p>
-  <strong>Group:</strong>
-  <%= @email.group %>
-</p>
-
 <%= link_to 'Edit', edit_email_path(@email) %> |
 <%= link_to 'Back', emails_path %>
