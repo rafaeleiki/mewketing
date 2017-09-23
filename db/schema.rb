@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170916005710) do
+ActiveRecord::Schema.define(version: 20170922204434) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,18 +21,28 @@ ActiveRecord::Schema.define(version: 20170916005710) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "email_groups", force: :cascade do |t|
+    t.bigint "email_id"
+    t.bigint "group_id"
+    t.index ["email_id"], name: "index_email_groups_on_email_id"
+    t.index ["group_id"], name: "index_email_groups_on_group_id"
+  end
+
   create_table "emails", force: :cascade do |t|
     t.datetime "schedule"
     t.string "title"
     t.string "body"
     t.bigint "sender_id"
-    t.bigint "receiver_id"
-    t.bigint "group_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["group_id"], name: "index_emails_on_group_id"
-    t.index ["receiver_id"], name: "index_emails_on_receiver_id"
     t.index ["sender_id"], name: "index_emails_on_sender_id"
+  end
+
+  create_table "group_receivers", force: :cascade do |t|
+    t.bigint "group_id"
+    t.bigint "receiver_id"
+    t.index ["group_id"], name: "index_group_receivers_on_group_id"
+    t.index ["receiver_id"], name: "index_group_receivers_on_receiver_id"
   end
 
   create_table "groups", force: :cascade do |t|
@@ -72,9 +82,11 @@ ActiveRecord::Schema.define(version: 20170916005710) do
     t.index ["sender_id"], name: "index_templates_on_sender_id"
   end
 
-  add_foreign_key "emails", "groups"
-  add_foreign_key "emails", "receivers"
+  add_foreign_key "email_groups", "emails"
+  add_foreign_key "email_groups", "groups"
   add_foreign_key "emails", "senders"
+  add_foreign_key "group_receivers", "groups"
+  add_foreign_key "group_receivers", "receivers"
   add_foreign_key "groups", "senders"
   add_foreign_key "receivers", "senders"
   add_foreign_key "senders", "clients"

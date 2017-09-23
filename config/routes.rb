@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   resources :emails
   resources :templates
   resources :groups
-  resources :receivers
+  resources :receivers do
+    get :add_to_group_show, on: :member
+  end
   resources :senders
   resources :clients
 
