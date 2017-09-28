@@ -11,6 +11,6 @@ class ApplicationController < ActionController::Base
   end
 
   def authorize_admin
-    redirect_to '/not_admin' unless current_user.admin
+    redirect_to '/senders/not_admin' unless current_user.admin
   end
 end

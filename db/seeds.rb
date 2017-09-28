@@ -1,21 +1,61 @@
 client = Client.create({ name: 'MewKeting' })
-sender = Sender.create({
+sender1 = Sender.create({
     email: 'a@a.com',
     password: '1234',
     admin: true,
     client: client
 })
 
-Sender.create({
+sender2 = Sender.create({
   email: 'b@b.com',
   password: '1234',
   admin: false,
-  client: Client.find(1)
+  client: client
   })
 
-Sender.create({
+sender3 = Sender.create({
   email: 'c@c.com',
   password: '1234',
   admin: false,
-  client: Client.find(1)
+  client: client
+  })
+
+client2 = Client.create({ name: 'Two'})
+
+sender4 = Sender.create({
+  email: '1@1.com',
+  password: '1234',
+  admin: true,
+  client: client2
+  })
+
+group1 = Group.create({
+  name: 'Pobres',
+  private: true,
+  sender: sender2
+  })
+
+group2 = Group.create({
+  name: 'Rykos',
+  private: false,
+  sender: sender3
+  })
+
+tmeplate1 = Template.create({
+  title: 'corpinho',
+  body: 'esse corpo nu',
+  sender: sender2
+  })
+
+receiver1 = Receiver.create({
+  name: 'Mindinho',
+  email: 'mindin433@meuemials.com',
+  sender: sender2
+  })
+
+email1 = Email.create ({
+  schedule: Time.new,
+  title: 'VEXA NOSSAS PROMOSSAUM',
+  body: 'nossaaa quantos produtus baratusss',
+  sender: sender3
   })

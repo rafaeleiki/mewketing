@@ -8,11 +8,15 @@ Rails.application.routes.draw do
   resources :groups
   resources :receivers do
     get :add_to_group_show, on: :member
+    get :access_denied, on: :collection
   end
   resources :senders do
     get :not_user, on: :collection
+    get :not_admin, on: :collection
   end
-  resources :clients
+  resources :clients do
+    get :access_denied, on: :collection
+  end
 
   # Session
   get '/login' => 'sessions#new'
