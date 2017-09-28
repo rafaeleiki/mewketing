@@ -24,10 +24,15 @@ class SendersController < ApplicationController
   # POST /senders
   # POST /senders.json
   def create
-    @sender = Sender.new(sender_params)
+    create_params = sender_params
+    create_obj = sender_params.except(:confirm_password)
+    create_obj[:client_id] = current_user.client_id
+    create_obj[:admin] = false
+    @sender = Sender.new(create_obj)
+    @sender.validate_new_password(nil, create_params[:password], create_params[:confirm_password])
 
     respond_to do |format|
-      if @sender.save
+      if @sender.errors.empty? && @sender.save
         format.html { redirect_to @sender, notice: 'Sender was successfully created.' }
         format.json { render :show, status: :created, location: @sender }
       else
@@ -40,8 +45,17 @@ class SendersController < ApplicationController
   # PATCH/PUT /senders/1
   # PATCH/PUT /senders/1.json
   def update
+    update_params = sender_edit_params
+    @sender.validate_new_password(update_params[:old_password],
+                                  update_params[:new_password],
+                                  update_params[:confirm_password])
+
+    update_object = update_params.except(:new_password, :old_password, :confirm_password)
+    update_object[:password] = update_params[:new_password]
+
     respond_to do |format|
-      if @sender.update(sender_params)
+      if @sender.errors.empty? && @sender.update(update_object)
+
         format.html { redirect_to @sender, notice: 'Sender was successfully updated.' }
         format.json { render :show, status: :ok, location: @sender }
       else
@@ -69,6 +83,11 @@ class SendersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def sender_params
-      params.require(:sender).permit(:email, :password_digest, :admin, :client_id)
+      params.require(:sender).permit(:email, :password, :confirm_password, :admin, :client_id)
+    end
+
+    def sender_edit_params
+      params.require(:sender).permit(:email, :new_password, :old_password,
+                                     :confirm_password, :admin, :client_id)
     end
 end

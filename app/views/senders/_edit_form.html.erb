@@ -16,15 +16,24 @@
     <%= form.text_field :email, id: :sender_email %>
   </div>
 
-  <div class="field">
-    <%= form.label :password %>
-    <%= form.password_field :password, id: :sender_password %>
-  </div>
+  <% if sender.persisted? %>
+    <div class="field">
+      <%= form.label :old_password %>
+      <%= form.password_field :old_password, id: :old_password %>
+    </div>
+  <% end %>
 
   <div class="field">
-    <%= form.label :confirm_password %>
-    <%= form.password_field :confirm_password, id: :confirm_password %>
+    <%= form.label :new_password %>
+    <%= form.password_field :new_password, id: :new_password %>
   </div>
+
+  <% if sender.persisted? %>
+    <div class="field">
+      <%= form.label :confirm_password %>
+      <%= form.password_field :confirm_password, id: :confirm_password %>
+    </div>
+  <% end %>
 
   <div class="actions">
     <%= form.submit %>
