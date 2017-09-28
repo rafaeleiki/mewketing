@@ -1,4 +1,6 @@
 class SendersController < ApplicationController
+  before_action :authorize
+  before_action :authorize_admin, only: [:new, :create, :destroy]
   before_action :set_sender, only: [:show, :edit, :update, :destroy]
 
   # GET /senders
@@ -19,6 +21,11 @@ class SendersController < ApplicationController
 
   # GET /senders/1/edit
   def edit
+    if !current_user.admin
+      if @sender.id != current_user.id
+        redirect_to '/senders/not_user'
+      end
+    end
   end
 
   # POST /senders
@@ -45,6 +52,13 @@ class SendersController < ApplicationController
   # PATCH/PUT /senders/1
   # PATCH/PUT /senders/1.json
   def update
+    def edit
+      if !current_user.admin
+        if @sender.id != current_user.id
+          redirect_to '/senders/not_user'
+        end
+      end
+    end
     update_params = sender_edit_params
     @sender.validate_new_password(update_params[:old_password],
                                   update_params[:new_password],
@@ -73,6 +87,9 @@ class SendersController < ApplicationController
       format.html { redirect_to senders_url, notice: 'Sender was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def not_user
   end
 
   private
