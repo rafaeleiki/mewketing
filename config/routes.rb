@@ -6,8 +6,10 @@ Rails.application.routes.draw do
   resources :emails
   resources :templates
   resources :groups
-  resources :receivers
-  get '/senders/not_user' => 'senders#not_user'
+  resources :receivers do
+    get :not_user, on: :collection
+    get :add_to_group_show, on: :member
+  end
   resources :senders
   resources :clients
 
