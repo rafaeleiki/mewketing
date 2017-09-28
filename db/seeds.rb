@@ -17,3 +17,12 @@ receiver = Receiver.create({
     email: 'abba@meucoracao.com',
     sender: sender
 })
+group = Group.create({
+    name: 'testName',
+    private: false,
+    sender: sender
+})
+group_receivers = GroupReceiver.create({
+    group: group,
+    receiver: receiver
+})
