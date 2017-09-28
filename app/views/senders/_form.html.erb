@@ -18,12 +18,12 @@
 
   <div class="field">
     <%= form.label :password %>
-    <%= form.text_field :password, id: :sender_password %>
+    <%= form.password_field :password, id: :sender_password %>
   </div>
 
   <div class="field">
-    <%= form.label :"confirm password" %>
-    <%= form.text_field :"confirm password", id: :confirm_password %>
+    <%= form.label :confirm_password %>
+    <%= form.password_field :confirm_password, id: :confirm_password %>
   </div>
 
   <div class="actions">
