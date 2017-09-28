@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170922204434) do
+ActiveRecord::Schema.define(version: 20170928143108) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20170922204434) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "enabled"
   end
 
   create_table "email_groups", force: :cascade do |t|
@@ -35,6 +36,7 @@ ActiveRecord::Schema.define(version: 20170922204434) do
     t.bigint "sender_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "enabled"
     t.index ["sender_id"], name: "index_emails_on_sender_id"
   end
 
@@ -51,6 +53,7 @@ ActiveRecord::Schema.define(version: 20170922204434) do
     t.bigint "sender_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "enabled"
     t.index ["sender_id"], name: "index_groups_on_sender_id"
   end
 
@@ -60,6 +63,7 @@ ActiveRecord::Schema.define(version: 20170922204434) do
     t.bigint "sender_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "enabled"
     t.index ["sender_id"], name: "index_receivers_on_sender_id"
   end
 
@@ -70,6 +74,7 @@ ActiveRecord::Schema.define(version: 20170922204434) do
     t.bigint "client_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "enabled"
     t.index ["client_id"], name: "index_senders_on_client_id"
   end
 
@@ -79,6 +84,7 @@ ActiveRecord::Schema.define(version: 20170922204434) do
     t.bigint "sender_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "enabled"
     t.index ["sender_id"], name: "index_templates_on_sender_id"
   end
 
