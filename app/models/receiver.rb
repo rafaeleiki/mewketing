@@ -1,5 +1,6 @@
 class Receiver < ApplicationRecord
   belongs_to :sender
+  has_many :email_receiver, :dependent => :delete_all
   has_many :group_receivers
   has_many :groups, -> {where(enabled: true)}, :through => :group_receivers
 
