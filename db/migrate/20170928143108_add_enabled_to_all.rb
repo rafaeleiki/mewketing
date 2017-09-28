@@ -4,7 +4,6 @@ class AddEnabledToAll < ActiveRecord::Migration[5.1]
     add_column :senders, :enabled, :boolean, :default => true
     add_column :receivers, :enabled, :boolean, :default => true
     add_column :groups, :enabled, :boolean, :default => true
-    add_column :templates, :enabled, :boolean, :default => true
     add_column :emails, :enabled, :boolean, :default => true
   end
 end
