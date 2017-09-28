@@ -1,15 +1,13 @@
 desc 'Checks if any email has to be sent'
 task :send_scheduled_messages => :environment do
-  puts "Checking email sent till #{Time.new}..."
-  mm = MailManager.new
+  time = Time.new
+  puts "Checking email sent till #{time}..."
   emails = Email.should_send
+
   emails.each do |email|
-    email.receivers.each do |receiver|
-      mm.send_email(receiver.email, email.title, email.body)
-      EmailReceiver.create({ email: email, receiver: receiver })
-      puts "Sent from #{email.sender.email} to #{receiver.email}"
-    end
+    email.send_email(time)
   end
+
   emails.update_all(sent: true)
   puts "done."
 end
