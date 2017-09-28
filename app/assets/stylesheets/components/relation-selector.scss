@@ -1,0 +1,25 @@
+.relation-list {
+  list-style: none;
+  padding: 0;
+
+  li {
+    padding: 0.5em;
+  }
+}
+
+.relation-label {
+  margin: 0 1em;
+  line-height: 2em;
+}
+
+.persisted {
+  background-color: #b9beff;
+
+  &.new {
+    background-color: #d2ffd2;
+  }
+}
+
+.deleted {
+  background-color: #ffb4c7;
+}
