@@ -7,10 +7,11 @@ Rails.application.routes.draw do
   resources :templates
   resources :groups
   resources :receivers do
-    get :not_user, on: :collection
     get :add_to_group_show, on: :member
   end
-  resources :senders
+  resources :senders do
+    get :not_user, on: :collection
+  end
   resources :clients
 
   # Session
