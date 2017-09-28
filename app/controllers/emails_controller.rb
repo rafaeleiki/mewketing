@@ -6,7 +6,7 @@ class EmailsController < ApplicationController
   # GET /emails
   # GET /emails.json
   def index
-    @emails = Email.all
+    @emails = Email.active
   end
 
   # GET /emails/1
