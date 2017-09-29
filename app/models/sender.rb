@@ -1,6 +1,7 @@
 class Sender < ApplicationRecord
   belongs_to :client
   has_many :groups
+  has_many :emails
   has_secure_password
 
   def validate_new_password(old_password, new_password, confirm_password)
