@@ -6,7 +6,7 @@ class EmailsController < ApplicationController
   # GET /emails
   # GET /emails.json
   def index
-    @emails = Email.active
+    @emails = current_user.client.emails
   end
 
   # GET /emails/1
@@ -27,10 +27,12 @@ class EmailsController < ApplicationController
   # POST /emails.json
   def create
     @email = Email.new(email_params)
-    @email.sender = user
+    @email.sender = current_user
+    @email.sent = email_params[:schedule] <= Time.new
 
     respond_to do |format|
       if @email.save
+        @email.send_email
         format.html { redirect_to @email, notice: 'Email was successfully created.' }
         format.json { render :show, status: :created, location: @email }
       else

@@ -21,6 +21,8 @@
     <%= form.check_box :private, id: :group_private %>
   </div>
 
+  <%= react_component('GroupRelationSelector', { id: group.id }) %>
+
   <div class="actions">
     <%= form.submit %>
   </div>
