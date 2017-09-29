@@ -2,7 +2,7 @@ class Receiver < ApplicationRecord
   belongs_to :sender
   has_many :email_receiver, :dependent => :delete_all
   has_many :group_receivers
-  has_many :groups, -> {where(enabled: true)}, :through => :group_receivers
+  has_many :groups, -> {active}, :through => :group_receivers
 
   # Scopes
   scope :active, -> {where(enabled: true)}
@@ -10,7 +10,6 @@ class Receiver < ApplicationRecord
 
   # Include the management of the enabled flag
   def destroy
-    self.enabled = false
-    save
+    update(enabled: false)
   end
 end

@@ -5,7 +5,6 @@ class Client < ApplicationRecord
 
   # Include the management of the enabled flag
   def destroy
-    self.enabled = false
-    save
+    update(enabled: false)
   end
 end

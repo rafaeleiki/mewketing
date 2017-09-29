@@ -9,8 +9,7 @@ class Sender < ApplicationRecord
 
   # Include the management of the enabled flag
   def destroy
-    self.enabled = false
-    save
+    update(enabled: false)
   end
 
   def validate_new_password(old_password, new_password, confirm_password)
