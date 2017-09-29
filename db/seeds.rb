@@ -10,12 +10,18 @@ Sender.create({
   email: 'b@b.com',
   password: '1234',
   admin: false,
-  client: Client.find(1)
+  client: client
   })
 
 Sender.create({
   email: 'c@c.com',
   password: '1234',
   admin: false,
-  client: Client.find(1)
+  client: client
+  })
+
+Receiver.create({
+  name: 'Ze',
+  email: 'emailze@mo.com',
+  sender: sender
   })
