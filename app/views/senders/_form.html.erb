@@ -17,18 +17,13 @@
   </div>
 
   <div class="field">
-    <%= form.label :password_digest %>
-    <%= form.text_field :password_digest, id: :sender_password_digest %>
+    <%= form.label :password %>
+    <%= form.password_field :password, id: :sender_password %>
   </div>
 
   <div class="field">
-    <%= form.label :admin %>
-    <%= form.check_box :admin, id: :sender_admin %>
-  </div>
-
-  <div class="field">
-    <%= form.label :client_id %>
-    <%= form.text_field :client_id, id: :sender_client_id %>
+    <%= form.label :confirm_password %>
+    <%= form.password_field :confirm_password, id: :confirm_password %>
   </div>
 
   <div class="actions">

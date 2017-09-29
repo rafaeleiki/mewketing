@@ -1,0 +1,41 @@
+<%= form_with(model: sender, local: true) do |form| %>
+  <% if sender.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(sender.errors.count, "error") %> prohibited this sender from being saved:</h2>
+
+      <ul>
+      <% sender.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.text_field :email, id: :sender_email %>
+  </div>
+
+  <% if sender.persisted? %>
+    <div class="field">
+      <%= form.label :old_password %>
+      <%= form.password_field :old_password, id: :old_password %>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :new_password %>
+    <%= form.password_field :new_password, id: :new_password %>
+  </div>
+
+  <% if sender.persisted? %>
+    <div class="field">
+      <%= form.label :confirm_password %>
+      <%= form.password_field :confirm_password, id: :confirm_password %>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

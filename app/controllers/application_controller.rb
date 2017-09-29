@@ -9,4 +9,8 @@ class ApplicationController < ActionController::Base
   def authorize
     redirect_to '/login' unless current_user
   end
+
+  def authorize_admin
+    redirect_to '/not_admin' unless current_user.admin
+  end
 end
