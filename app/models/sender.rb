@@ -4,6 +4,15 @@ class Sender < ApplicationRecord
   has_many :emails
   has_secure_password
 
+  # Scopes
+  scope :active, -> {where(enabled: true)}
+  scope :inactive, -> {where(enabled: false)}
+
+  # Include the management of the enabled flag
+  def destroy
+    update(enabled: false)
+  end
+
   def validate_new_password(old_password, new_password, confirm_password)
     if persisted?
       valid_password = authenticate(old_password)
