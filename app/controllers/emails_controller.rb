@@ -28,8 +28,7 @@ class EmailsController < ApplicationController
   def create
     @email = Email.new(email_params)
     @email.sender = current_user
-    @email.sent = (email_params[:schedule] <=> Time.new) == -1
-    print @email.sent
+    @email.sent = @email.schedule <= Time.new
 
     respond_to do |format|
       if @email.save
