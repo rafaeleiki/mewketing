@@ -13,9 +13,32 @@ class Email < ApplicationRecord
   def send_email(time = Time.new)
     mm = MailManager.new
     self.receivers.each do |receiver|
-      mm.send_email(receiver.email, title, body)
+      mm.send_email(receiver.email, title, body_with_vars(receiver.email))
       EmailReceiver.create({ email_id: self.id, receiver: receiver })
       puts "Email sent from #{sender.email} to #{receiver.email} at #{time}"
     end
+  end
+
+  def body_with_vars(email)
+    text = body
+    if vars.present?
+      vars['values'].each do |data|
+        if data['email'] == email
+          text = replace_vars(data)
+          break
+        end
+      end
+    end
+    text
+  end
+
+  private
+
+  def replace_vars(data)
+    text = body
+    data.each_pair do |variable, value|
+      text.gsub!("{{#{variable}}}", value)
+    end
+    text
   end
 end

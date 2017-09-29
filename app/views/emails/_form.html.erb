@@ -28,7 +28,11 @@
 
   <div class="field">
     <%= form.label :body %>
-    <%= form.text_area :body, id: :email_body %>
+    <%= react_component('VarsTable', {
+        text: email.body,
+        values: email.vars.nil? ? [] : email.vars['values'],
+        defaultVars: email.vars.nil? ? ['email'] : email.vars['vars'] })
+    %>
   </div>
 
   <div class="field">
