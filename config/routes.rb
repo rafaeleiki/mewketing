@@ -3,9 +3,12 @@ Rails.application.routes.draw do
   root 'home#index'
   mount API => '/'
 
-  resources :emails
   resources :templates
   resources :clients
+
+  resources :emails do
+    get :groups, on: :member
+  end
 
   resources :groups do
     get :receivers, on: :member
