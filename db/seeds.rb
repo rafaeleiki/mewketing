@@ -5,6 +5,20 @@ sender = Sender.create({
     admin: true,
     client: client
 })
+receiver = Receiver.create({
+    name: 'Nano',
+    email: 'abba@meucoracao.com',
+    sender: sender
+})
+group = Group.create({
+    name: 'testName',
+    private: false,
+    sender: sender
+})
+group_receivers = GroupReceiver.create({
+    group: group,
+    receiver: receiver
+})
 
 Sender.create({
   email: 'b@b.com',

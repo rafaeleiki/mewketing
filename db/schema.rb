@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 20170929131219) do
     t.bigint "sender_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "enabled", default: true
     t.boolean "sent"
     t.boolean "enabled", default: true
     t.jsonb "vars", default: "{}"
@@ -93,6 +94,7 @@ ActiveRecord::Schema.define(version: 20170929131219) do
     t.bigint "sender_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "enabled", default: true
     t.index ["sender_id"], name: "index_templates_on_sender_id"
   end
 

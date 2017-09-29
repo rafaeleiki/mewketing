@@ -1,12 +1,12 @@
 class GroupsController < ApplicationController
 
   before_action :authorize
-  before_action :set_group, only: [:show, :edit, :update, :destroy, :receivers]
+  before_action :set_group, only: [:show, :edit, :update, :destroy]
 
   # GET /groups
   # GET /groups.json
   def index
-    @groups = Group.all
+    @groups = Group.active
   end
 
   # GET /groups/1
@@ -65,6 +65,7 @@ class GroupsController < ApplicationController
   end
 
   def receivers
+    @group = Group.find(params[:id]) if params[:id] != 'null'
     query = params[:query]
     receivers = get_receivers_from_group
     receivers_ids = receivers.map { |receiver| receiver[:receiver_id] }
@@ -89,11 +90,15 @@ class GroupsController < ApplicationController
     end
 
     def get_receivers_from_group
-      @group.group_receivers.map { |relation| {
-          id: relation.id,
-          receiver_id: relation.receiver_id,
-          title: relation.receiver.email
-      }}
+      if @group.nil?
+        []
+      else
+        @group.group_receivers.map { |relation| {
+            id: relation.id,
+            receiver_id: relation.receiver_id,
+            title: relation.receiver.email
+        }}
+      end
     end
 
     def get_searched_receivers(query, receiver_ids)

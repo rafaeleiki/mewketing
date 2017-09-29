@@ -6,6 +6,15 @@ class Email < ApplicationRecord
 
   validates :title, presence: true
 
+  # Scopes
+  scope :active, -> {where(enabled: true)}
+  scope :inactive, -> {where(enabled: false)}
+
+  # Include the management of the enabled flag
+  def destroy
+    update(enabled: false)
+  end
+
   scope :sent, -> { where(sent: true) }
   scope :not_sent, -> { where(sent: false) }
   scope :should_send, -> { not_sent.where('schedule <= ?', Time.new) }
