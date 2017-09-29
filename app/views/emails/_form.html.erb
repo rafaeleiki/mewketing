@@ -12,8 +12,13 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :schedule %>
-    <%= form.datetime_select :schedule, id: :email_schedule %>
+    <%= form.label :template %>
+    <%= form.select :template,
+                    options_for_select(@templates.map { |t| [t.title, t.body] }),
+                    { include_blank: true },
+                    :id => :email_template
+    %>
+    <p id="empty_template" style="display: none;">Warning: this template is empty.</p>
   </div>
 
   <div class="field">
@@ -27,14 +32,8 @@
   </div>
 
   <div class="field">
-    <%= form.label :receiver_id %>
-    <%= form.select :receiver_id, options_for_select(Receiver.all.map { |r| [r.name, r.id] }) %>
-
-  </div>
-
-  <div class="field">
-    <%= form.label :group_id %>
-    <%= form.select :group_id, options_for_select(Group.all.map { |g| [g.name, g.id] }) %>
+    <%= form.label :schedule %>
+    <%= form.datetime_select :schedule, id: :email_schedule %>
   </div>
 
   <div class="actions">

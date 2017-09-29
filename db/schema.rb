@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170928184921) do
+ActiveRecord::Schema.define(version: 20170929131219) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 20170928184921) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "sent"
+    t.jsonb "vars", default: "{}", null: false
     t.index ["sender_id"], name: "index_emails_on_sender_id"
   end
 

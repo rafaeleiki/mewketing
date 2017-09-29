@@ -2,6 +2,7 @@ class EmailsController < ApplicationController
 
   before_action :authorize
   before_action :set_email, only: [:show, :edit, :update, :destroy]
+  before_action :set_templates, only: [:new, :edit]
 
   # GET /emails
   # GET /emails.json
@@ -75,5 +76,9 @@ class EmailsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def email_params
       params.require(:email).permit(:schedule, :title, :body, :receiver_id, :group_id)
+    end
+
+    def set_templates
+      @templates = current_user.client.templates
     end
 end
