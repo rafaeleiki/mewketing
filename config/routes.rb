@@ -5,14 +5,19 @@ Rails.application.routes.draw do
 
   resources :emails
   resources :templates
-  resources :groups
+  resources :clients
+
+  resources :groups do
+    get :receivers, on: :member
+  end
+
   resources :receivers do
     get :add_to_group_show, on: :member
   end
+
   resources :senders do
     get :not_user, on: :collection
   end
-  resources :clients
 
   # Session
   get '/login' => 'sessions#new'
