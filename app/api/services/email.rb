@@ -5,28 +5,6 @@ module Services
     version 'v1', using: :header, vendor: 'email'
     content_type :json, 'application/json;charset=utf-8'
 
-    helpers do
-      def get_message(email_address, subject, content)
-        options = { :address              => "smtp.gmail.com",
-                    :port                 => 587,
-                    :user_name            => ENV["email"],
-                    :password             => ENV["email_password"],
-                    :authentication       => :plain,
-                    :domain               => 'localhost:3000',
-                    :enable_starttls_auto => true  }
-
-        mail = Mail.new do
-          from    'marketing.mewtwo@gmail.com'
-          to      email_address
-          subject subject
-          body    content
-        end
-
-        mail.delivery_method :smtp, options
-        mail
-      end
-    end
-
     resource :email do
       desc 'Sends an email'
       params do
@@ -36,8 +14,7 @@ module Services
       end
 
       post :send do
-        message = get_message(params[:to], params[:subject], params[:content])
-        message.deliver!
+        message = MailManager.new.send_email(params[:to], params[:subject], params[:content])
         { email: message.to_s }
       end
 
