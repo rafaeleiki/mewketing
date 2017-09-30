@@ -6,12 +6,13 @@ class EmailsController < ApplicationController
   # GET /emails
   # GET /emails.json
   def index
-    @emails = Email.all
+    @emails = current_user.client.emails
   end
 
   # GET /emails/1
   # GET /emails/1.json
   def show
+    redirect_to '/emails/not_email' unless @email.sender.client == current_user.client
   end
 
   # GET /emails/new

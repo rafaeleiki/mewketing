@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   root 'home#index'
   mount API => '/'
 
-  resources :emails
+  resources :emails do
+    get :not_email, on: :collection
+  end
   resources :templates do
     get :not_template, on: :collection
   end
