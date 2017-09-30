@@ -11,7 +11,7 @@ class ClientsController < ApplicationController
   # GET /clients/1
   # GET /clients/1.json
   def show
-    redirect_to '/clients/access_denied' if params[:id] != current_user.client.id
+    redirect_to '/clients/not_client' if params[:id] != current_user.client.id
   end
 
   # GET /clients/new

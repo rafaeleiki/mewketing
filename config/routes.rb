@@ -4,8 +4,12 @@ Rails.application.routes.draw do
   mount API => '/'
 
   resources :emails
-  resources :templates
-  resources :groups
+  resources :templates do
+    get :not_template, on: :collection
+  end
+  resources :groups do
+    get :not_group, on: :collection
+  end
   resources :receivers do
     get :add_to_group_show, on: :member
     get :access_denied, on: :collection
@@ -13,9 +17,10 @@ Rails.application.routes.draw do
   resources :senders do
     get :not_user, on: :collection
     get :not_admin, on: :collection
+    get :not_client, on: :collection
   end
   resources :clients do
-    get :access_denied, on: :collection
+    get :not_client, on: :collection
   end
 
   # Session

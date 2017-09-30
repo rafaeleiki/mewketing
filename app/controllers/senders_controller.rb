@@ -12,6 +12,7 @@ class SendersController < ApplicationController
   # GET /senders/1
   # GET /senders/1.json
   def show
+    redirect_to '/senders/not_client' unless @sender.client == current_user.client
   end
 
   # GET /senders/new
