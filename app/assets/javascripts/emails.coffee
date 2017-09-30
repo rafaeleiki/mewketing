@@ -7,7 +7,7 @@ initForEmails = ->
     if (templateBody != '')
       templateBody += '\n\n'
 
-    body.text templateBody + body.text()
+    body.val(templateBody + body.val())
 
 
 $(document).on 'turbolinks:load', -> initForEmails()

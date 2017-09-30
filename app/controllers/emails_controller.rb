@@ -2,7 +2,7 @@ class EmailsController < ApplicationController
 
   before_action :authorize
   before_action :set_email, only: [:show, :edit, :update, :destroy]
-  before_action :set_templates, only: [:new, :edit]
+  before_action :set_templates, only: [:new, :edit, :create, :update]
 
   # GET /emails
   # GET /emails.json
@@ -29,7 +29,7 @@ class EmailsController < ApplicationController
   def create
     @email = Email.new(email_params)
     @email.sender = current_user
-    @email.sent = email_params[:schedule] <= Time.new
+    @email.sent = @email.schedule <= Time.new
 
     respond_to do |format|
       if @email.save

@@ -65,6 +65,7 @@ class VarsTable extends React.Component {
             <div>
                 <textarea defaultValue={text}
                           name="email[body]"
+                          id="email_body"
                           onChange={(event) => this.setState({ text: event.target.value })}>
                 </textarea>
                 <table>

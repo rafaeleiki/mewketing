@@ -28,10 +28,11 @@
 
   <div class="field">
     <%= form.label :body %>
+    <% no_vars = email.vars.nil? || email.vars == '{}' %>
     <%= react_component('VarsTable', {
-        text: email.body,
-        values: email.vars.nil? ? [] : email.vars['values'],
-        defaultVars: email.vars.nil? ? ['email'] : email.vars['vars'] })
+        text: email.body.nil? ? '' : email.body,
+        values: no_vars ? [] : email.vars['values'],
+        defaultVars: no_vars ? ['email'] : email.vars['vars'] })
     %>
   </div>
 
