@@ -4,4 +4,5 @@ class API < Grape::API
   format :json
   mount Services::EmailAPI
   mount Services::GroupAPI
+  mount Services::SenderAPI
 end
