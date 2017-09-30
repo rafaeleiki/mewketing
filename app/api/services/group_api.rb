@@ -53,7 +53,7 @@ module Services
         optional :private, type: Boolean, desc: 'Name of the new group'
       end
       post :get do
-        Group.active.find_by(@q_params)
+        Group.active.where(@q_params)
       end
 
       desc 'Read all groups'
@@ -77,6 +77,7 @@ module Services
         gn = Group.active.find_by(sender: @user, name: params[:name])
         error!("There is a record with this name") if !gn.nil?
         g.update(@q_params)
+        return g
       end
 
       desc 'Remove one '
@@ -87,7 +88,8 @@ module Services
       post :remove do
         g = Group.active.find_by(@q_params)
         error!("Record not found") if g.nil?
-        g.destroy
+        error!("Internal error") if !g.destroy
+        return {"status":"Record removed"}
       end
 
       # Receivers management
@@ -105,7 +107,7 @@ module Services
         error!("Receiver already in group") if !GroupReceiver.find_by(group: g, receiver: r).nil?
         gr = GroupReceiver.create(group: g, receiver: r)
         error!("Internal error") if gr.nil?
-        return gr
+        return {"status":"Receiver added to group"}
       end
 
       desc 'Remove a receiver from a group'
@@ -121,7 +123,8 @@ module Services
         error!("Receiver not found") if r.nil?
         gr = GroupReceiver.find_by(group: g, receiver: r)
         error!("Receiver not inside group") if gr.nil?
-        gr.destroy
+        error!("Internal error") if !gr.destroy
+        return {"status":"Receiver removed from group"}
       end
     end
   end
