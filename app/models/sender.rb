@@ -7,6 +7,7 @@ class Sender < ApplicationRecord
   # Scopes
   scope :active, -> {where(enabled: true)}
   scope :inactive, -> {where(enabled: false)}
+  scope :admin, -> {where(admin: true)}
 
   # Include the management of the enabled flag
   def destroy
