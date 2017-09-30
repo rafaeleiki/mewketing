@@ -83,10 +83,14 @@ class SendersController < ApplicationController
   # DELETE /senders/1
   # DELETE /senders/1.json
   def destroy
-    @sender.destroy
-    respond_to do |format|
-      format.html { redirect_to senders_url, notice: 'Sender was successfully destroyed.' }
-      format.json { head :no_content }
+    if @sender.id != current_user.id
+      @sender.destroy
+      respond_to do |format|
+        format.html { redirect_to senders_url, notice: 'Sender was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    else
+      redirect_to senders_url, notice: 'Cannot delete self'
     end
   end
 
