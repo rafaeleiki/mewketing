@@ -6,6 +6,9 @@ class Email < ApplicationRecord
 
   validates :title, presence: true
 
+  # Custom validations
+  validate :valid_vars
+
   # Scopes
   scope :active, -> {where(enabled: true)}
   scope :inactive, -> {where(enabled: false)}
@@ -49,5 +52,32 @@ class Email < ApplicationRecord
       text.gsub!("{{#{variable}}}", value)
     end
     text
+  end
+
+  def valid_vars
+    if vars.present? && vars != '{}'
+      if vars.key?('vars') && vars.key?('values')
+        vars_values_validation
+      else
+        errors.add(:vars, "can't have invalid format; need keys 'vars' and 'values'")
+      end
+    end
+  end
+
+  def vars_values_validation
+    valid = true
+    vars['vars'].each do |variable|
+      var_found = false
+      vars['values'].each do |data_line|
+        var_found = data_line.key? variable
+        break if var_found
+      end
+      valid = var_found
+      break if !valid
+    end
+
+    if !valid
+      errors.add(:vars, 'has invalid values')
+    end
   end
 end
