@@ -5,4 +5,5 @@ class API < Grape::API
   mount Services::EmailAPI
   mount Services::GroupAPI
   mount Services::SenderAPI
+  mount Services::ReceiverAPI
 end
