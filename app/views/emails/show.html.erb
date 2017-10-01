@@ -17,17 +17,17 @@
 
 <p>
   <strong>Sender:</strong>
-  <%= @email.sender[:email] %>
+  <%= @email.sender.email %>
 </p>
 
 <p>
   <strong>Receiver:</strong>
-  <%= @email.receivers.map{|receiver| receiver[:email]} %>
+  <%= @email.receivers.map { |receiver| receiver.email } %>
 </p>
 
 <p>
   <strong>Group:</strong>
-  <%= @email.groups.map{|group| group[:name]} %>
+  <%= @email.groups.map { |group| group.name } %>
 </p>
 
 <%= link_to 'Edit', edit_email_path(@email) %> |

@@ -2,6 +2,7 @@ class EmailsController < ApplicationController
 
   before_action :authorize
   before_action :set_email, only: [:show, :edit, :update, :destroy]
+  before_action :set_templates, only: [:new, :edit, :create, :update]
 
   # GET /emails
   # GET /emails.json
@@ -45,8 +46,17 @@ class EmailsController < ApplicationController
   # PATCH/PUT /emails/1
   # PATCH/PUT /emails/1.json
   def update
+    update_object = email_params
+    vp = vars_params
+    update_object[:vars] = {
+        vars: vp[:vars],
+        values: vp[:values]
+    }
+
+    debugger
+
     respond_to do |format|
-      if @email.update(email_params)
+      if @email.update(update_object)
         format.html { redirect_to @email, notice: 'Email was successfully updated.' }
         format.json { render :show, status: :ok, location: @email }
       else
@@ -115,4 +125,26 @@ class EmailsController < ApplicationController
           title: group.name
       }}
     end
+
+    def vars_params
+      vars = []
+      params[:vars].each_pair do |key, value|
+        vars << value
+      end
+
+      values = []
+      params[:vars_values].each_pair do |key, value|
+        values << value.permit!
+      end
+
+      {
+          vars: vars,
+          values: values
+      }
+    end
+
+    def set_templates
+      @templates = current_user.client.templates
+    end
+
 end
