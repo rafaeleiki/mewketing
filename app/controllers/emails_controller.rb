@@ -53,8 +53,6 @@ class EmailsController < ApplicationController
         values: vp[:values]
     }
 
-    debugger
-
     respond_to do |format|
       if @email.update(update_object)
         format.html { redirect_to @email, notice: 'Email was successfully updated.' }
