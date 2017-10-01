@@ -1,6 +1,6 @@
-<p id="notice"><%= notice %></p>
+<%= snackbar_notifications(notice, alert).html_safe %>
 
-<h1>Groups</h1>
+<h1 class="<%= get_style_classes('h1-title')%>" >Groups</h1>
 
 <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
   <thead>
@@ -19,4 +19,4 @@
   </tbody>
 </table>
 
-<%= link_to 'Back', receivers_path %>
+<%= link_to 'Back', receivers_path, class: get_style_classes('btn-back') %>

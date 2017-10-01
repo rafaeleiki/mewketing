@@ -1,6 +1,6 @@
-<h1>Editing Email</h1>
+<h1 class="<%= get_style_classes('h1-title')%>" >Editing Email</h1>
 
 <%= render 'form', email: @email %>
 
-<%= link_to 'Show', @email %> |
-<%= link_to 'Back', emails_path %>
+<%= link_to 'Show', @email, class:get_style_classes('btn-show') %> |
+<%= link_to 'Back', emails_path, class:get_style_classes('btn-back') %>

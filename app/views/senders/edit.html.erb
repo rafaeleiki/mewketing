@@ -1,6 +1,6 @@
-<h1>Editing Sender</h1>
+<h1 class="<%= get_style_classes('h1-title')%>" >Editing Sender</h1>
 
 <%= render 'edit_form', sender: @sender %>
 
-<%= link_to 'Show', @sender %> |
-<%= link_to 'Back', senders_path %>
+<%= link_to 'Show', @sender, class:get_style_classes('btn-show') %> |
+<%= link_to 'Back', senders_path, class: get_style_classes('btn-back') %>

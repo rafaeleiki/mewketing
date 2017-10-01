@@ -1,6 +1,6 @@
-<p id="notice"><%= notice %></p>
+<%= snackbar_notifications(notice, alert).html_safe %>
 
-<h1>Receivers</h1>
+<h1 class="<%= get_style_classes('h1-title') %>" >Receivers</h1>
 
 <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
   <thead>
@@ -18,10 +18,9 @@
         <td><%= receiver.name %></td>
         <td><%= receiver.email %></td>
         <td><%= receiver.sender.email %></td>
-        <td><%= link_to 'Show', receiver %></td>
-        <td><%= link_to 'Edit', edit_receiver_path(receiver) %></td>
-        <td><%= link_to 'Destroy', receiver, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <td><%= link_to 'Add to Group', add_to_group_show_receiver_path(receiver) %></td>
+        <td><%= link_to 'Show', receiver, class:get_style_classes('btn-show') %></td>
+        <td><%= link_to 'Edit', edit_receiver_path(receiver), class: get_style_classes('btn-edit') %></td>
+        <td><%= link_to 'Destroy', receiver, method: :delete, data: { confirm: 'Are you sure?' }, class: get_style_classes('btn-destroy') %></td>
       </tr>
     <% end %>
   </tbody>
@@ -29,4 +28,4 @@
 
 <br>
 
-<%= link_to 'New Receiver', new_receiver_path %>
+<%= link_to 'New Receiver', new_receiver_path, class: get_style_classes('btn-new') %>

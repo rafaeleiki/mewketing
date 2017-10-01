@@ -1,9 +1,9 @@
-<p id="notice"><%= notice %></p>
+<%= snackbar_notifications(notice, alert).html_safe %>
 
 <p>
   <strong>Name:</strong>
   <%= @client.name %>
 </p>
 
-<%= link_to 'Edit', edit_client_path(@client) %> |
-<%= link_to 'Back', clients_path %>
+<%= link_to 'Edit', edit_client_path(@client), class:get_style_classes('btn-edit') %> |
+<%= link_to 'Back', clients_path, class:get_style_classes('btn-back') %>

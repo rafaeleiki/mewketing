@@ -11,29 +11,29 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :schedule %>
+  <div class="field <%= get_style_classes('form-input-div') %>">
+    <%= form.label :schedule, class: get_style_classes('form-label-text-input') %>
     <%= form.datetime_select :schedule, id: :email_schedule %>
   </div>
 
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title, id: :email_title %>
+  <div class="field <%= get_style_classes('form-input-div') %>">
+    <%= form.label :title, class: get_style_classes('form-label-text-input') %>
+    <%= form.text_field :title, id: :email_title, class: get_style_classes('form-text-input') %>
   </div>
 
-  <div class="field">
-    <%= form.label :body %>
+  <div class="field <%= get_style_classes('form-input-div') %>">
+    <%= form.label :body, class: get_style_classes('form-label-text-input') %>
     <%= form.text_area :body, id: :email_body %>
   </div>
 
-  <div class="field">
-    <%= form.label :receiver_id %>
+  <div class="field <%= get_style_classes('form-input-div') %>">
+    <%= form.label :receiver_id, class: get_style_classes('form-label-text-input') %>
     <%= form.select :receiver_id, options_for_select(Receiver.all.map { |r| [r.name, r.id] }) %>
 
   </div>
 
-  <div class="field">
-    <%= form.label :group_id %>
+  <div class="field <%= get_style_classes('form-input-div') %>">
+    <%= form.label :group_id, class: get_style_classes('form-label-text-input') %>
     <%= form.select :group_id, options_for_select(Group.all.map { |g| [g.name, g.id] }) %>
   </div>
 
