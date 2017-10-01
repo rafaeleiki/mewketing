@@ -75,7 +75,7 @@ module Services
         g = Group.active.find_by(sender: @user, name: params[:original_name])
         error!("Record not found") if g.nil?
         gn = Group.active.find_by(sender: @user, name: params[:name])
-        error!("There is a record with this name") if !gn.nil?
+        error!("There is already a record with this name") if !gn.nil?
         g.update(@q_params)
         return g
       end
