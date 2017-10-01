@@ -4,6 +4,8 @@ class Email < ApplicationRecord
   has_many :groups, :through => :email_groups
   has_many :receivers, :through => :groups
 
+  accepts_nested_attributes_for :email_groups, allow_destroy: true
+
   validates :title, presence: true
 
   # Custom validations

@@ -27,6 +27,11 @@
   </div>
 
   <div class="field">
+    <%= form.label :groups %>
+    <%= react_component('EmailRelationSelector', { id: email.id }) %>
+  </div>
+
+  <div class="field">
     <%= form.label :body %>
     <% no_vars = email.vars.nil? || email.vars == '{}' %>
     <%= react_component('VarsTable', {
