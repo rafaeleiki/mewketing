@@ -50,7 +50,6 @@ module Services
       params do
         use :credentials
         optional :title, type: String, desc: 'Title of the template'
-        optional :email, type: String, desc: 'Body of the template'
       end
       post :get do
         Template.where(@q_params)
@@ -69,7 +68,7 @@ module Services
         use :credentials
         requires :original_title, type: String, desc: 'Original title of the template'
         optional :title, type: String, desc: 'Title of the template'
-        optional :email, type: String, desc: 'Body of the template'
+        optional :body, type: String, desc: 'Body of the template'
       end
       post :update do
         t = Template.find_by(sender: @user, title: params[:original_title])
