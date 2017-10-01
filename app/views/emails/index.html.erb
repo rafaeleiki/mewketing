@@ -23,9 +23,9 @@
         <td><%= email.sender.email %></td>
         <td><%= email.groups.map { |g| g.name }.join(', ') %></td>
         <td><%= email.sent? ? 'yes' : 'no' %></td>
-        <td><%= link_to 'Show', email, class: get_style_classes('btn-show') %></td>
-        <td><%= link_to 'Edit', edit_email_path(email), class: get_style_classes('btn-edit') %></td>
-        <td><%= link_to 'Destroy', email, method: :delete, data: { confirm: 'Are you sure?' }, class: get_style_classes('btn-destroy') %></td>
+        <td><%= link_to 'Show', email, class:get_style_classes('btn-show') %></td>
+        <td><%= link_to 'Edit', edit_email_path(email), class:get_style_classes('btn-edit') %></td>
+        <td><%= link_to 'Destroy', email, method: :delete, data: { confirm: 'Are you sure?' }, class:get_style_classes('btn-destroy') %></td>
       </tr>
     <% end %>
   </tbody>

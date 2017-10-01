@@ -15,5 +15,13 @@
   <%= @group.sender.email %>
 </p>
 
+<p>
+  <strong>Receivers:</strong>
+  <ol>
+    <%= @group.receivers.map { |receiver| "<li>#{ link_to receiver.email, receiver }</li>" }.join.html_safe %>
+  </ol>
+</p>
+
 <%= link_to 'Edit', edit_group_path(@group), class: get_style_classes('btn-edit') %> |
 <%= link_to 'Back', groups_path, class: get_style_classes('btn-back') %>
+

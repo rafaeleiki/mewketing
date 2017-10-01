@@ -17,7 +17,21 @@
 
 <p>
   <strong>Sender:</strong>
-  <%= @email.sender %>
+  <%= @email.sender.email %>
+</p>
+
+<p>
+  <strong>Receiver:</strong>
+  <ol>
+    <%= @email.receivers.map { |receiver| "<li>#{ link_to receiver.email, receiver }</li>" }.join.html_safe %>
+  </ol>
+</p>
+
+<p>
+  <strong>Group:</strong>
+  <ol>
+    <%= @email.groups.map { |group| "<li>#{ link_to group.name, group }</li>" }.join.html_safe %>
+  </ol>
 </p>
 
 <%= link_to 'Edit', edit_email_path(@email), class:get_style_classes('btn-edit') %> |

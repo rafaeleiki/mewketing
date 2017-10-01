@@ -11,9 +11,14 @@
     </div>
   <% end %>
 
-  <div class="field <%= get_style_classes('form-input-div') %>">
-    <%= form.label :schedule, class: get_style_classes('form-label-text-input') %>
-    <%= form.datetime_select :schedule, id: :email_schedule %>
+  <div class="field">
+    <%= form.label :template, class: get_style_classes('form-label-text-input') %>
+    <%= form.select :template,
+                    options_for_select(@templates.map { |t| [t.title, t.body] }),
+                    { include_blank: true },
+                    :id => :email_template
+    %>
+    <p id="empty_template" style="display: none;">Warning: this template is empty.</p>
   </div>
 
   <div class="field <%= get_style_classes('form-input-div') %>">
@@ -21,20 +26,24 @@
     <%= form.text_field :title, id: :email_title, class: get_style_classes('form-text-input') %>
   </div>
 
-  <div class="field <%= get_style_classes('form-input-div') %>">
+  <div class="field">
+    <%= form.label :schedule %>
+    <%= form.datetime_select :schedule, id: :email_schedule %>
+  </div>
+
+  <div class="field">
+    <%= form.label :groups, class: get_style_classes('form-label-text-input') %>
+    <%= react_component('EmailRelationSelector', { id: email.id }) %>
+  </div>
+
+  <div class="field">
     <%= form.label :body, class: get_style_classes('form-label-text-input') %>
-    <%= form.text_area :body, id: :email_body %>
-  </div>
-
-  <div class="field <%= get_style_classes('form-input-div') %>">
-    <%= form.label :receiver_id, class: get_style_classes('form-label-text-input') %>
-    <%= form.select :receiver_id, options_for_select(Receiver.all.map { |r| [r.name, r.id] }) %>
-
-  </div>
-
-  <div class="field <%= get_style_classes('form-input-div') %>">
-    <%= form.label :group_id, class: get_style_classes('form-label-text-input') %>
-    <%= form.select :group_id, options_for_select(Group.all.map { |g| [g.name, g.id] }) %>
+    <% no_vars = email.vars.nil? || email.vars == '{}' %>
+    <%= react_component('VarsTable', {
+        text: email.body.nil? ? '' : email.body,
+        values: no_vars ? [] : email.vars['values'],
+        defaultVars: no_vars ? ['email'] : email.vars['vars'] })
+    %>
   </div>
 
   <div class="actions">

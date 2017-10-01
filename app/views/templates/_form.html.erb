@@ -17,8 +17,9 @@
   </div>
 
   <div class="field <%= get_style_classes('form-input-div') %>">
-    <%= form.label :body, class: get_style_classes('form-label-text-input') %>
-    <%= form.text_field :body, id: :template_body, class: get_style_classes('form-text-input') %>
+    <p>To use a variable in your message, put it between "{{}}". E.g. {{var}}</p>
+    <%= form.label :body %>
+    <%= form.text_area :body, id: :template_body, class: get_style_classes('form-text-input') %>
   </div>
   
   <div class="actions">
