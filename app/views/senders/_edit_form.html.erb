@@ -15,24 +15,28 @@
     <%= form.label :email, class: get_style_classes('form-label-text-input') %>
     <%= form.text_field :email, id: :sender_email, class: get_style_classes('form-text-input') %>
   </div>
+  <br />
 
   <% if sender.persisted? %>
     <div class="field <%= get_style_classes('form-input-div') %>">
       <%= form.label :old_password, class: get_style_classes('form-label-text-input') %>
-      <%= form.password_field :old_password, id: :old_password %>
+      <%= form.password_field :old_password, id: :old_password, class: get_style_classes('form-text-input') %>
     </div>
+    <br />
   <% end %>
 
   <div class="field <%= get_style_classes('form-input-div') %>">
     <%= form.label :new_password, class: get_style_classes('form-label-text-input') %>
-    <%= form.password_field :new_password, id: :new_password %>
+    <%= form.password_field :new_password, id: :new_password, class: get_style_classes('form-text-input') %>
   </div>
+  <br />
 
   <% if sender.persisted? %>
     <div class="field <%= get_style_classes('form-input-div') %>">
       <%= form.label :confirm_password, class: get_style_classes('form-label-text-input') %>
-      <%= form.password_field :confirm_password, id: :confirm_password %>
+      <%= form.password_field :confirm_password, id: :confirm_password, class: get_style_classes('form-text-input')  %>
     </div>
+    <br />
   <% end %>
 
   <div class="actions">

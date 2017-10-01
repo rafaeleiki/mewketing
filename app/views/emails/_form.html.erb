@@ -11,14 +11,15 @@
     </div>
   <% end %>
 
-  <div class="field <%= get_style_classes('form-input-div') %>">
-    <%= form.label :template, class: get_style_classes('form-label-select-input') %>
+  <div class="field <%= get_style_classes('form-select-div') %>">
     <%= form.select :template,
                     options_for_select(@templates.map { |t| [t.title, t.body_without_images] }),
                     { include_blank: true },
                     :id => :email_template,
                     :class => get_style_classes('form-select-input')
     %>
+    <div class="mdl-selectfield__icon"><i class="material-icons">arrow_drop_down</i></div>
+    <%= form.label :template, class: get_style_classes('form-label-select-input') %>
     <p id="empty_template" style="display: none;">Warning: this template is empty.</p>
   </div>
   <br />
@@ -27,6 +28,7 @@
     <%= form.label :title, class: get_style_classes('form-label-text-input') %>
     <%= form.text_field :title, id: :email_title, class: get_style_classes('form-text-input') %>
   </div>
+  <br />
 
   <div class="field">
     <% no_vars = email.vars.nil? || email.vars == '{}' %>
@@ -39,11 +41,13 @@
         })
     %>
   </div>
+  <br />
 
-  <div class="field <%= get_style_classes('form-input-div') %>">
-    <%= form.label :schedule, class: get_style_classes('form-label-text-input') %>
-    <%= form.datetime_select :schedule, id: :email_schedule %>
+  <div class="field">
+    <%= form.label :schedule, class: get_style_classes('form-label-input') %>
+    <%= form.datetime_select :schedule, {with_css_classes:true}, {class: get_style_classes('form-datetime_select-input')}%>
   </div>
+  <br />
 
   <div class="actions">
     <%= form.submit 'Enviar email', class: get_style_classes('form-submit') %>

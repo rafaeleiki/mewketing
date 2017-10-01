@@ -73,10 +73,15 @@ module ApplicationHelper
     when 'form-checkbox-input'
       'mdl-checkbox__input'
 
+    when 'form-select-div'
+      'mdl-selectfield mdl-js-selectfield'
     when 'form-label-select-input'
-      'mdl-select'
+      'mdl-selectfield__label'
+    when 'form-datetime_select-input'
+      'mdl-selectfield__select datetime_select'
     when 'form-select-input'
-      'mdl-text__input'
+      'mdl-selectfield__select'
+
 
     when 'form-submit'
       'mdl-button mdl-js-button mdl-button--raised mdl-button--colored'

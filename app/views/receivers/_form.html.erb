@@ -15,11 +15,13 @@
     <%= form.label :name, class: get_style_classes('form-label-text-input') %>
     <%= form.text_field :name, id: :receiver_name, class: get_style_classes('form-text-input') %>
   </div>
+  <br />
 
   <div class="field <%= get_style_classes('form-input-div') %>">
     <%= form.label :email, class: get_style_classes('form-label-text-input') %>
     <%= form.text_field :email, id: :receiver_email, class: get_style_classes('form-text-input') %>
   </div>
+  <br />
 
   <div class="actions">
     <%= form.submit class: get_style_classes('form-submit') %>

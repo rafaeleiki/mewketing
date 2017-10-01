@@ -116,11 +116,12 @@ class VarsTable extends React.Component {
         const { text } = this.state;
         const { entity } = this.props;
         return (
-            <div>
-                <label>Body</label>
+            <div className="mdl-textfield mdl-js-textfield mdl-textarea">
+                <label className="mdl-textfield__label">Body</label>
                 <textarea value={text}
                           id={`${entity}_body`}
-                          onChange={(event) => this.setState({ text: event.target.value })}>
+                          onChange={(event) => this.setState({ text: event.target.value })}
+                          className="mdl-textfield__input mdl-textarea__input">
                 </textarea>
             </div>
         );
@@ -128,8 +129,8 @@ class VarsTable extends React.Component {
 
     renderPreview() {
         return (
-            <div>
-                <label>Preview</label>
+            <div className="preview-div">
+                <h4 className="">Preview</h4>
                 <div dangerouslySetInnerHTML={this.getPreviewHTML()}/>
             </div>
         );
@@ -138,8 +139,8 @@ class VarsTable extends React.Component {
     renderVarsController() {
         let { values, vars } = this.state;
         return (
-          <div>
-              <table>
+          <div className="renderVarsController">
+              <table className="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
                   <thead>
                   <tr>{ vars.map((variable, i) => <th key={i}>{ variable }</th>) }</tr>
                   </thead>
@@ -147,13 +148,16 @@ class VarsTable extends React.Component {
                   { values.map((dataLine, index) => this.renderLine(dataLine, index, vars)) }
                   </tbody>
               </table>
+              <br />
               {
                   vars.map((variable, i) =>
                       <input type="hidden" name={ `vars[${i}]` } key={i} value={variable} />
                   )
               }
-              <button type="button" onClick={(event) => this.addDataLine()}>Add</button>
-              <button type="button" onClick={(event) => this.setState({ vars: this.getVars() })}>Refresh</button>
+              <div className="actions-vars">
+                <button type="button" onClick={(event) => this.addDataLine()} className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Add</button> |
+                <button type="button" onClick={(event) => this.setState({ vars: this.getVars() })} className="mdl-button mdl-js-button mdl-button--raised">Refresh</button>
+              </div>
           </div>
         );
     }
@@ -164,7 +168,9 @@ class VarsTable extends React.Component {
             <div>
                 <input type="hidden" name={`${entity}[body]`} value={this.getFullBody()} />
                 { this.renderBody() }
+                <br />
                 <input type="file" onChange={(event) => this.addImage(event.target.files[0]) } />
+                <hr />
                 { this.renderPreview() }
                 <hr />
                 { useVars ? this.renderVarsController() : null }
