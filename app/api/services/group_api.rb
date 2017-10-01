@@ -61,7 +61,7 @@ module Services
         use :credentials
       end
       post :get_all do
-        Group.active.where(sender: @user).all
+        Group.active.where(@q_params).all
       end
 
       desc 'Update one group'
