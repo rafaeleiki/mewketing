@@ -1,5 +1,6 @@
 class Email < ApplicationRecord
   include BodyImageAttachable
+  include Activatable
 
   belongs_to :sender
   has_many :email_groups
@@ -12,15 +13,6 @@ class Email < ApplicationRecord
 
   # Custom validations
   validate :valid_vars
-
-  # Scopes
-  scope :active, -> {where(enabled: true)}
-  scope :inactive, -> {where(enabled: false)}
-
-  # Include the management of the enabled flag
-  def destroy
-    update(enabled: false)
-  end
 
   scope :sent, -> { where(sent: true) }
   scope :not_sent, -> { where(sent: false) }

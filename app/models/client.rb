@@ -1,14 +1,7 @@
 class Client < ApplicationRecord
+  include Activatable
+
   has_many :senders
   has_many :emails, :through => :senders
   has_many :templates, :through => :senders
-
-  # Scopes
-  scope :active, -> {where(enabled: true)}
-  scope :inactive, -> {where(enabled: false)}
-
-  # Include the management of the enabled flag
-  def destroy
-    update(enabled: false)
-  end
 end

@@ -1,5 +1,4 @@
 module BodyImageAttachable
-
   extend ActiveSupport::Concern
 
   def body_without_images
