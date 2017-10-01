@@ -29,11 +29,11 @@ class EmailsController < ApplicationController
   def create
     @email = Email.new(email_params)
     @email.sender = current_user
-    @email.sent = false
+    @email.sent = @email.schedule <= Time.new
 
     respond_to do |format|
       if @email.save
-        @email.send_email if email_params[:schedule] <= Time.new
+        @email.send_email if @email.sent
         format.html { redirect_to @email, notice: 'Email was successfully created.' }
         format.json { render :show, status: :created, location: @email }
       else
