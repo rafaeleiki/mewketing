@@ -6,4 +6,5 @@ class API < Grape::API
   mount Services::GroupAPI
   mount Services::SenderAPI
   mount Services::ReceiverAPI
+  mount Services::TemplateAPI
 end
