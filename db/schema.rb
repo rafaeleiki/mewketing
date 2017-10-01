@@ -45,7 +45,6 @@ ActiveRecord::Schema.define(version: 20170929131219) do
     t.datetime "updated_at", null: false
     t.boolean "enabled", default: true
     t.boolean "sent"
-    t.boolean "enabled", default: true
     t.jsonb "vars", default: "{}"
     t.index ["sender_id"], name: "index_emails_on_sender_id"
   end
