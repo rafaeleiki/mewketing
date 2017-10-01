@@ -35,7 +35,7 @@ class Email < ApplicationRecord
 
   def body_with_vars(email)
     text = body
-    if vars.present?
+    if vars.present? && vars != '{}'
       vars['values'].each do |data|
         if data['email'] == email
           text = replace_vars(data)
