@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   resources :emails do
     get :not_email, on: :collection
+    get :groups, on: :member
   end
   resources :templates do
     get :not_template, on: :collection

@@ -104,9 +104,9 @@ class GroupsController < ApplicationController
 
     def get_searched_receivers(query, receiver_ids)
       if receiver_ids.nil? || receiver_ids.empty?
-        searched_receivers = Receiver.where('email LIKE ?', "%#{query}%")
+        searched_receivers = Receiver.active.where('email LIKE ?', "%#{query}%")
       else
-        searched_receivers = Receiver.where('email LIKE ? AND id NOT IN (?)', "%#{query}%", receiver_ids)
+        searched_receivers = Receiver.active.where('email LIKE ? AND id NOT IN (?)', "%#{query}%", receiver_ids)
       end
 
       searched_receivers.map { |receiver| {

@@ -1,3 +1,13 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+initForEmails = ->
+  $('#email_template').change ->
+    body = $ '#email_body'
+    templateBody = $(this).val()
+
+    $('#empty_template').toggle(templateBody == '')
+    if (templateBody != '')
+      templateBody += '\n\n'
+
+    body.val(templateBody + body.val())
+
+
+$(document).on 'turbolinks:load', -> initForEmails()

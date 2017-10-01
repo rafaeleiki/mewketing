@@ -73,3 +73,9 @@ email1 = Email.create ({
   body: 'nossaaa quantos produtus baratusss',
   sender: sender3
   })
+
+Receiver.create({
+  name: 'Ze',
+  email: 'emailze@mo.com',
+  sender: sender
+  })
