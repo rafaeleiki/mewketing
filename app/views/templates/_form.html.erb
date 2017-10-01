@@ -18,8 +18,13 @@
 
   <div class="field <%= get_style_classes('form-input-div') %>">
     <p>To use a variable in your message, put it between "{{}}". E.g. {{var}}</p>
-    <%= form.label :body %>
-    <%= form.text_area :body, id: :template_body, class: get_style_classes('form-text-input') %>
+    <%= react_component('VarsTable', {
+          text: template.body.nil? ? '' : template.body,
+          values: [],
+          useVars: true,
+          entity: 'template'
+      })
+    %>
   </div>
   
   <div class="actions">

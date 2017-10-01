@@ -14,7 +14,7 @@
   <div class="field <%= get_style_classes('form-input-div') %>">
     <%= form.label :template, class: get_style_classes('form-label-select-input') %>
     <%= form.select :template,
-                    options_for_select(@templates.map { |t| [t.title, t.body] }),
+                    options_for_select(@templates.map { |t| [t.title, t.body_without_images] }),
                     { include_blank: true },
                     :id => :email_template,
                     :class => get_style_classes('form-select-input')
@@ -29,12 +29,14 @@
   </div>
 
   <div class="field">
-    <%= form.label :body %>
     <% no_vars = email.vars.nil? || email.vars == '{}' %>
     <%= react_component('VarsTable', {
-        text: email.body.nil? ? '' : email.body,
-        values: no_vars ? [] : email.vars['values'],
-        defaultVars: no_vars ? ['email'] : email.vars['vars'] })
+          text: email.body.nil? ? '' : email.body,
+          values: no_vars ? [] : email.vars['values'],
+          defaultVars: no_vars ? ['email'] : email.vars['vars'],
+          useVars: true,
+          entity: 'email'
+        })
     %>
   </div>
 

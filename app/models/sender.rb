@@ -1,4 +1,6 @@
 class Sender < ApplicationRecord
+  include Activatable
+
   belongs_to :client
   has_many :groups
   has_many :emails
