@@ -2,11 +2,12 @@ class ReceiversController < ApplicationController
 
   before_action :authorize
   before_action :set_receiver, only: [:show, :edit, :update, :destroy, :add_to_group_show]
+  before_action :verify_receiver, only: [:show, :edit, :update, :destroy, :add_to_group_show]
 
   # GET /receivers
   # GET /receivers.json
   def index
-    @receivers = Receiver.active
+    @receivers = current_user.client.receivers
   end
 
   def add_to_group_show
@@ -91,5 +92,9 @@ class ReceiversController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def receiver_params
       params.require(:receiver).permit(:name, :email, :sender_id)
+    end
+
+    def verify_receiver
+      redirect_to '/receivers/access_denied' if current_user.client != @receiver.client
     end
 end

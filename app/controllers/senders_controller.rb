@@ -6,12 +6,13 @@ class SendersController < ApplicationController
   # GET /senders
   # GET /senders.json
   def index
-    @senders = Sender.active
+    @senders = current_user.client.senders
   end
 
   # GET /senders/1
   # GET /senders/1.json
   def show
+    redirect_to '/senders/not_client' unless @sender.client == current_user.client
   end
 
   # GET /senders/new
@@ -82,10 +83,14 @@ class SendersController < ApplicationController
   # DELETE /senders/1
   # DELETE /senders/1.json
   def destroy
-    @sender.destroy
-    respond_to do |format|
-      format.html { redirect_to senders_url, notice: 'Sender was successfully destroyed.' }
-      format.json { head :no_content }
+    if @sender.id != current_user.id
+      @sender.destroy
+      respond_to do |format|
+        format.html { redirect_to senders_url, notice: 'Sender was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    else
+      redirect_to senders_url, notice: 'Cannot delete self'
     end
   end
 

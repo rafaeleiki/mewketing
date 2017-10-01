@@ -1,15 +1,17 @@
 class ClientsController < ApplicationController
+  before_action :authorize
   before_action :set_client, only: [:show, :edit, :update, :destroy]
 
   # GET /clients
   # GET /clients.json
   def index
-    @clients = Client.all
+    @clients = [current_user.client]
   end
 
   # GET /clients/1
   # GET /clients/1.json
   def show
+    redirect_to '/clients/not_client' if params[:id] != current_user.client.id
   end
 
   # GET /clients/new
