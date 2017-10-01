@@ -53,8 +53,6 @@ class EmailsController < ApplicationController
         values: vp[:values]
     }
 
-    debugger
-
     respond_to do |format|
       if @email.update(update_object)
         format.html { redirect_to @email, notice: 'Email was successfully updated.' }
@@ -76,6 +74,15 @@ class EmailsController < ApplicationController
     end
   end
 
+  def groups
+    @email = Email.find(params[:id]) if params[:id] != 'null'
+    query = params[:query]
+    groups = get_groups_from_email
+    groups_ids = groups.map { |group| group[:group_id] }
+    searched_groups = get_searched_groups(query, groups_ids)
+    render json: { data: groups + searched_groups }
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_email
@@ -84,7 +91,37 @@ class EmailsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def email_params
-      params.require(:email).permit(:schedule, :title, :body)
+      params.require(:email).permit(:schedule, :title, :body,
+                                    email_groups_attributes: email_groups_params)
+    end
+
+    def email_groups_params
+      [:id, :group_id, :_destroy]
+    end
+
+    def get_groups_from_email
+      if @email.nil?
+        []
+      else
+        @email.email_groups.map { |relation| {
+            id: relation.id,
+            group_id: relation.group_id,
+            title: relation.group.name
+        }}
+      end
+    end
+
+    def get_searched_groups(query, group_ids)
+      if group_ids.nil? || group_ids.empty?
+        searched_groups = Group.active.where('name LIKE ?', "%#{query}%")
+      else
+        searched_groups = Group.active.where('name LIKE ? AND id NOT IN (?)', "%#{query}%", group_ids)
+      end
+
+      searched_groups.map { |group| {
+          group_id: group.id,
+          title: group.name
+      }}
     end
 
     def vars_params
