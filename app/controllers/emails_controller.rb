@@ -113,9 +113,9 @@ class EmailsController < ApplicationController
 
     def get_searched_groups(query, group_ids)
       if group_ids.nil? || group_ids.empty?
-        searched_groups = Group.where('name LIKE ?', "%#{query}%")
+        searched_groups = Group.active.where('name LIKE ?', "%#{query}%")
       else
-        searched_groups = Group.where('name LIKE ? AND id NOT IN (?)', "%#{query}%", group_ids)
+        searched_groups = Group.active.where('name LIKE ? AND id NOT IN (?)', "%#{query}%", group_ids)
       end
 
       searched_groups.map { |group| {
