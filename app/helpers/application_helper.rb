@@ -1,6 +1,6 @@
 module ApplicationHelper
   def snackbar_notifications(notice, alert)
-    snackbar = '<div id="demo-snackbar-example" class="mdl-js-snackbar mdl-snackbar">
+    snackbar = '<div id="noticesnackbar" class="mdl-js-snackbar mdl-snackbar">
       <div class="mdl-snackbar__text"></div>
       <button class="mdl-snackbar__action" type="button"></button>
     </div>'
@@ -8,7 +8,7 @@ module ApplicationHelper
     if notice
       snackbar += '<script type="text/javascript">
         window.onload = setTimeout(function () {
-          var snackbarContainer = document.getElementById("demo-snackbar-example");
+          var snackbarContainer = document.getElementById("noticesnackbar");
           var data = {
             message: "' + notice + '",
             timeout: 5000
@@ -22,7 +22,7 @@ module ApplicationHelper
     if alert
       snackbar += '<script type="text/javascript">
       window.onload = setTimeout(function () {
-        var snackbarContainer = document.getElementById("demo-snackbar-example");
+        var snackbarContainer = document.getElementById("noticesnackbar");
         var data = {
           message: "' + alert + '",
           timeout: 5000

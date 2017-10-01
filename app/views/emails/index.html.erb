@@ -1,5 +1,6 @@
 <%= snackbar_notifications(notice, alert).html_safe %>
 
+
 <h1 class="<%= get_style_classes('h1-title')%>" >Emails</h1>
 
 <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
@@ -22,9 +23,9 @@
         <td><%= email.sender.email %></td>
         <td><%= email.groups.map { |g| g.name }.join(', ') %></td>
         <td><%= email.sent? ? 'yes' : 'no' %></td>
-        <td><%= link_to 'Show', email %></td>
-        <td><%= link_to 'Edit', edit_email_path(email) %></td>
-        <td><%= link_to 'Destroy', email, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', email, class: get_style_classes('btn-show') %></td>
+        <td><%= link_to 'Edit', edit_email_path(email), class: get_style_classes('btn-edit') %></td>
+        <td><%= link_to 'Destroy', email, method: :delete, data: { confirm: 'Are you sure?' }, class: get_style_classes('btn-destroy') %></td>
       </tr>
     <% end %>
   </tbody>
