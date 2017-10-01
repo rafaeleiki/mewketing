@@ -1,4 +1,6 @@
 class Template < ApplicationRecord
+  include BodyImageAttachable
+
   belongs_to :sender
   validates :title, presence: true, uniqueness: true
 

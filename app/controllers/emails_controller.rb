@@ -126,12 +126,12 @@ class EmailsController < ApplicationController
 
     def vars_params
       vars = []
-      params[:vars].each_pair do |key, value|
+      params.key?(:vars) && params[:vars].each_pair do |key, value|
         vars << value
       end
 
       values = []
-      params[:vars_values].each_pair do |key, value|
+      params.key?(:vars_values) && params[:vars_values].each_pair do |key, value|
         values << value.permit!
       end
 
