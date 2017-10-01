@@ -6,12 +6,13 @@ class TemplatesController < ApplicationController
   # GET /templates
   # GET /templates.json
   def index
-    @templates = Template.all
+    @templates = current_user.client.templates
   end
 
   # GET /templates/1
   # GET /templates/1.json
   def show
+    redirect_to '/templates/not_template' unless @template.sender.client == current_user.client
   end
 
   # GET /templates/new

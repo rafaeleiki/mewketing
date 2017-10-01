@@ -12,7 +12,7 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :template, class: get_style_classes('form-label-text-input') %>
+    <%= form.label :template %>
     <%= form.select :template,
                     options_for_select(@templates.map { |t| [t.title, t.body] }),
                     { include_blank: true },
@@ -27,23 +27,18 @@
   </div>
 
   <div class="field">
-    <%= form.label :schedule %>
-    <%= form.datetime_select :schedule, id: :email_schedule %>
-  </div>
-
-  <div class="field">
-    <%= form.label :groups, class: get_style_classes('form-label-text-input') %>
-    <%= react_component('EmailRelationSelector', { id: email.id }) %>
-  </div>
-
-  <div class="field">
-    <%= form.label :body, class: get_style_classes('form-label-text-input') %>
+    <%= form.label :body %>
     <% no_vars = email.vars.nil? || email.vars == '{}' %>
     <%= react_component('VarsTable', {
         text: email.body.nil? ? '' : email.body,
         values: no_vars ? [] : email.vars['values'],
         defaultVars: no_vars ? ['email'] : email.vars['vars'] })
     %>
+  </div>
+
+  <div class="field <%= get_style_classes('form-input-div') %>">
+    <%= form.label :schedule, class: get_style_classes('form-label-text-input') %>
+    <%= form.datetime_select :schedule, id: :email_schedule %>
   </div>
 
   <div class="actions">

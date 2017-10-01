@@ -20,6 +20,7 @@
       <tr>
         <td><%= email.schedule %></td>
         <td><%= email.title %></td>
+        <td><%= email.body %></td>
         <td><%= email.sender.email %></td>
         <td><%= email.groups.map { |g| g.name }.join(', ') %></td>
         <td><%= email.sent? ? 'yes' : 'no' %></td>

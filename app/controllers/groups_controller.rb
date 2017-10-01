@@ -6,12 +6,13 @@ class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.json
   def index
-    @groups = Group.active
+    @groups = current_user.client.groups
   end
 
   # GET /groups/1
   # GET /groups/1.json
   def show
+    redirect_to '/groups/not_group' unless @group.sender.client == current_user.client
   end
 
   # GET /groups/new
