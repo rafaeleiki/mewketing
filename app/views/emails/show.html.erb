@@ -17,17 +17,12 @@
 
 <p>
   <strong>Sender:</strong>
-  <%= @email.sender %>
+  <%= @email.sender.email %>
 </p>
 
 <p>
-  <strong>Receiver:</strong>
-  <%= @email.receiver %>
-</p>
-
-<p>
-  <strong>Group:</strong>
-  <%= @email.group %>
+  <strong>Groups:</strong>
+  <%= @email.groups.map {|g| g.name }.join(', ') %>
 </p>
 
 <%= link_to 'Edit', edit_email_path(@email) %> |

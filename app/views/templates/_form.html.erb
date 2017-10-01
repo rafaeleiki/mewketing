@@ -16,9 +16,11 @@
     <%= form.text_field :title, id: :template_title %>
   </div>
 
+
   <div class="field">
+    <p>To use a variable in your message, put it between "{{}}". E.g. {{var}}</p>
     <%= form.label :body %>
-    <%= form.text_field :body, id: :template_body %>
+    <%= form.text_area :body, id: :template_body %>
   </div>
   
   <div class="actions">
