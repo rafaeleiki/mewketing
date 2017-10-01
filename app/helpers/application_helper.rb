@@ -73,6 +73,11 @@ module ApplicationHelper
     when 'form-checkbox-input'
       'mdl-checkbox__input'
 
+    when 'form-label-select-input'
+      'mdl-select'
+    when 'form-select-input'
+      'mdl-text__input'
+
     when 'form-submit'
       'mdl-button mdl-js-button mdl-button--raised mdl-button--colored'
 

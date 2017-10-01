@@ -11,15 +11,17 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :template %>
+  <div class="field <%= get_style_classes('form-input-div') %>">
+    <%= form.label :template, class: get_style_classes('form-label-select-input') %>
     <%= form.select :template,
                     options_for_select(@templates.map { |t| [t.title, t.body] }),
                     { include_blank: true },
-                    :id => :email_template
+                    :id => :email_template,
+                    :class => get_style_classes('form-select-input')
     %>
     <p id="empty_template" style="display: none;">Warning: this template is empty.</p>
   </div>
+  <br />
 
   <div class="field <%= get_style_classes('form-input-div') %>">
     <%= form.label :title, class: get_style_classes('form-label-text-input') %>

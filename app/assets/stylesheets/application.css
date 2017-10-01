@@ -29,3 +29,7 @@ body {
 .page-content:not(.container) {
     padding: 1em;
 }
+
+.fix-opacity {
+    opacity: 1;
+}
