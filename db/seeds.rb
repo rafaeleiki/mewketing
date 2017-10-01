@@ -77,5 +77,5 @@ email1 = Email.create ({
 Receiver.create({
   name: 'Ze',
   email: 'emailze@mo.com',
-  sender: sender
+  sender: sender1
   })
