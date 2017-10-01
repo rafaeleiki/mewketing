@@ -33,7 +33,7 @@ class EmailsController < ApplicationController
 
     respond_to do |format|
       if @email.save
-        @email.send_email
+        @email.send_email if @email.sent
         format.html { redirect_to @email, notice: 'Email was successfully created.' }
         format.json { render :show, status: :created, location: @email }
       else
