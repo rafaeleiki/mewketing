@@ -1,5 +1,14 @@
 class Group < ApplicationRecord
   belongs_to :sender
-  has_many :receivers, :through => :group_receivers
-  has_many :group_receivers, :dependent => :delete_all
+  has_many :group_receivers
+  has_many :receivers, -> {active}, :through => :group_receivers
+
+  # Scopes
+  scope :active, -> {where(enabled: true)}
+  scope :inactive, -> {where(enabled: false)}
+
+  # Include the management of the enabled flag
+  def destroy
+    update(enabled: false)
+  end
 end

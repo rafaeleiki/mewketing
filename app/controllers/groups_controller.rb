@@ -6,7 +6,7 @@ class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.json
   def index
-    @groups = Group.all
+    @groups = Group.active
   end
 
   # GET /groups/1
@@ -64,6 +64,15 @@ class GroupsController < ApplicationController
     end
   end
 
+  def receivers
+    @group = Group.find(params[:id]) if params[:id] != 'null'
+    query = params[:query]
+    receivers = get_receivers_from_group
+    receivers_ids = receivers.map { |receiver| receiver[:receiver_id] }
+    searched_receivers = get_searched_receivers(query, receivers_ids)
+    render json: { data: receivers + searched_receivers }
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_group
@@ -72,6 +81,36 @@ class GroupsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def group_params
-      params.require(:group).permit(:name, :private, :sender_id)
+      params.require(:group).permit(:name, :private, :sender_id,
+                                    group_receivers_attributes: group_receivers_params)
+    end
+
+    def group_receivers_params
+      [:id, :receiver_id, :_destroy]
+    end
+
+    def get_receivers_from_group
+      if @group.nil?
+        []
+      else
+        @group.group_receivers.map { |relation| {
+            id: relation.id,
+            receiver_id: relation.receiver_id,
+            title: relation.receiver.email
+        }}
+      end
+    end
+
+    def get_searched_receivers(query, receiver_ids)
+      if receiver_ids.nil? || receiver_ids.empty?
+        searched_receivers = Receiver.where('email LIKE ?', "%#{query}%")
+      else
+        searched_receivers = Receiver.where('email LIKE ? AND id NOT IN (?)', "%#{query}%", receiver_ids)
+      end
+
+      searched_receivers.map { |receiver| {
+          receiver_id: receiver.id,
+          title: receiver.email
+      }}
     end
 end

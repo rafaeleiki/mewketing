@@ -5,10 +5,12 @@
 <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
   <thead>
     <tr>
-      <th class="mdl-data-table__cell--non-numeric">Schedule</th>
-      <th class="mdl-data-table__cell--non-numeric">Title</th>
-      <th class="mdl-data-table__cell--non-numeric">Sender</th>
-      <th class="mdl-data-table__cell--non-numeric" colspan="3"></th>
+      <th>Schedule</th>
+      <th>Title</th>
+      <th>Sender</th>
+      <th>Groups</th>
+      <th>Sent?</th>
+      <th colspan="3"></th>
     </tr>
   </thead>
 
@@ -17,10 +19,12 @@
       <tr>
         <td><%= email.schedule %></td>
         <td><%= email.title %></td>
-        <td><%= email.sender.name %></td>
-        <td><%= link_to 'Show', email, class:get_style_classes('btn-show') %></td>
-        <td><%= link_to 'Edit', edit_email_path(email), class:get_style_classes('btn-edit') %></td>
-        <td><%= link_to 'Destroy', email, method: :delete, data: { confirm: 'Are you sure?' }, class:get_style_classes('btn-destroy') %></td>
+        <td><%= email.sender.email %></td>
+        <td><%= email.groups.map { |g| g.name }.join(', ') %></td>
+        <td><%= email.sent? ? 'yes' : 'no' %></td>
+        <td><%= link_to 'Show', email %></td>
+        <td><%= link_to 'Edit', edit_email_path(email) %></td>
+        <td><%= link_to 'Destroy', email, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

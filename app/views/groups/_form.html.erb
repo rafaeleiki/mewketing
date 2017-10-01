@@ -23,6 +23,7 @@
     <% end %>
   </div>
 
+  <%= react_component('GroupRelationSelector', { id: group.id }) %>
 
   <div class="actions">
     <%= form.submit :class => get_style_classes('form-submit') %>

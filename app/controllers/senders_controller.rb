@@ -6,7 +6,7 @@ class SendersController < ApplicationController
   # GET /senders
   # GET /senders.json
   def index
-    @senders = Sender.all
+    @senders = Sender.active
   end
 
   # GET /senders/1
