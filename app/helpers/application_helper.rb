@@ -55,7 +55,7 @@ module ApplicationHelper
 
       # Title
     when 'h1-title'
-      'mdl-typography--display-4'
+      'mdl-typography--display-3'
 
       # Form
     when 'form-input-div'
