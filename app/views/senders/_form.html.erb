@@ -11,22 +11,25 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :email %>
-    <%= form.text_field :email, id: :sender_email %>
+  <div class="field <%= get_style_classes('form-input-div') %>">
+    <%= form.label :email, class: get_style_classes('form-label-text-input') %>
+    <%= form.text_field :email, id: :sender_email, class: get_style_classes('form-text-input') %>
   </div>
+  <br />
 
-  <div class="field">
-    <%= form.label :password %>
-    <%= form.password_field :password, id: :sender_password %>
+  <div class="field <%= get_style_classes('form-input-div') %>">
+    <%= form.label :password, class: get_style_classes('form-label-text-input') %>
+    <%= form.password_field :password, id: :sender_password, class: get_style_classes('form-text-input') %>
   </div>
+  <br />
 
-  <div class="field">
-    <%= form.label :confirm_password %>
-    <%= form.password_field :confirm_password, id: :confirm_password %>
+  <div class="field <%= get_style_classes('form-input-div') %>">
+    <%= form.label :confirm_password, class: get_style_classes('form-label-text-input') %>
+    <%= form.password_field :confirm_password, id: :confirm_password, class: get_style_classes('form-text-input') %>
   </div>
+  <br />
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class: get_style_classes('form-submit') %>
   </div>
 <% end %>

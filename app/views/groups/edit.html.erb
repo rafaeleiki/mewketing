@@ -1,6 +1,6 @@
-<h1>Editing Group</h1>
+<h1 class="<%= get_style_classes('h1-title')%>" >Editing Group</h1>
 
 <%= render 'form', group: @group %>
 
-<%= link_to 'Show', @group %> |
-<%= link_to 'Back', groups_path %>
+<%= link_to 'Show', @group, class:get_style_classes('btn-show') %> |
+<%= link_to 'Back', groups_path, class:get_style_classes('btn-back') %>

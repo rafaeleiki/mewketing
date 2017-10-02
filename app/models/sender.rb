@@ -5,7 +5,16 @@ class Sender < ApplicationRecord
   has_many :groups
   has_many :emails
   has_many :templates
+  has_many :receivers
   has_secure_password
+
+  scope :admin, -> {where(admin: true)}
+  scope :removable, -> {where(admin: false)}
+
+  # Include the management of the enabled flag
+  def destroy
+    update(enabled: false)
+  end
 
   def validate_new_password(old_password, new_password, confirm_password)
     if persisted?

@@ -11,24 +11,25 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title, id: :template_title %>
+  <div class="field <%= get_style_classes('form-input-div') %>">
+    <%= form.label :title, class: get_style_classes('form-label-text-input') %>
+    <%= form.text_field :title, id: :template_title, class: get_style_classes('form-text-input') %>
   </div>
+  <br />
 
-
-  <div class="field">
+  <div class="field <%= get_style_classes('form-input-div') %>">
     <p>To use a variable in your message, put it between "{{}}". E.g. {{var}}</p>
     <%= react_component('VarsTable', {
           text: template.body.nil? ? '' : template.body,
           values: [],
-          useVars: true,
+          useVars: false,
           entity: 'template'
       })
     %>
   </div>
-  
+  <br />
+
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class: get_style_classes('form-submit') %>
   </div>
 <% end %>

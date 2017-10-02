@@ -1,9 +1,17 @@
-<h1>Login</h1>
+<h1 class="<%= get_style_classes('h1-title')%>" >Login</h1>
 
 <%= form_tag '/login' do %>
 
-    Email: <%= text_field_tag :email %>
-    Password: <%= password_field_tag :password %>
-    <%= submit_tag 'Login' %>
+    <div class="field <%= get_style_classes('form-input-div') %>">
+      <%= label_tag :email, nil, class: get_style_classes('form-label-text-input') %>
+      <%= text_field_tag :email, nil, class: get_style_classes('form-text-input') %>
+    </div>
+
+    <div class="field <%= get_style_classes('form-input-div') %>">
+      <%= label_tag :password, nil, class: get_style_classes('form-label-text-input') %>
+      <%= password_field_tag :password, nil, class: get_style_classes('form-text-input') %>
+    </div>
+
+    <%= submit_tag 'Login', class: get_style_classes('form-submit') %>
 
 <% end %>

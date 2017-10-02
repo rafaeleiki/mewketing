@@ -2,9 +2,9 @@ class API < Grape::API
 
   prefix 'api'
   format :json
-  mount Services::Email
-
-  get :a do
-    {}
-  end
+  mount Services::EmailAPI
+  mount Services::GroupAPI
+  mount Services::SenderAPI
+  mount Services::ReceiverAPI
+  mount Services::TemplateAPI
 end

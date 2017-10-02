@@ -1,15 +1,27 @@
+.relation-search {
+  width: 95%;
+}
+
 .relation-list {
   list-style: none;
   padding: 0;
 
+
   li {
     padding: 0.5em;
+    opacity: 1;
   }
+}
+
+.relation-label.mdl-list__item-avatar {
+  background-color: rgb(63,81,181); // colored
 }
 
 .relation-label {
   margin: 0 1em;
   line-height: 2em;
+
+
 }
 
 .persisted {

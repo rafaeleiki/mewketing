@@ -117,10 +117,11 @@ class VarsTable extends React.Component {
         const { entity } = this.props;
         return (
             <div>
-                <label>Body</label>
+                <label className="mdl-textfield__label">Body</label>
                 <textarea value={text}
                           id={`${entity}_body`}
-                          onChange={(event) => this.setState({ text: event.target.value })}>
+                          onChange={(event) => this.setState({ text: event.target.value })}
+                          className="mdl-textfield__input mdl-textarea__input">
                 </textarea>
             </div>
         );
@@ -158,13 +159,50 @@ class VarsTable extends React.Component {
         );
     }
 
+    renderPreview() {
+        return (
+            <div className="preview-div">
+                <h4 className="">Preview</h4>
+                <div dangerouslySetInnerHTML={this.getPreviewHTML()}/>
+            </div>
+        );
+    }
+
+    renderVarsController() {
+        let { values, vars } = this.state;
+        return (
+          <div className="renderVarsController">
+              <table className="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+                  <thead>
+                  <tr>{ vars.map((variable, i) => <th key={i}>{ variable }</th>) }</tr>
+                  </thead>
+                  <tbody>
+                  { values.map((dataLine, index) => this.renderLine(dataLine, index, vars)) }
+                  </tbody>
+              </table>
+              <br />
+              {
+                  vars.map((variable, i) =>
+                      <input type="hidden" name={ `vars[${i}]` } key={i} value={variable} />
+                  )
+              }
+              <div className="actions-vars">
+                <button type="button" onClick={(event) => this.addDataLine()} className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Add</button> |
+                <button type="button" onClick={(event) => this.setState({ vars: this.getVars() })} className="mdl-button mdl-js-button mdl-button--raised">Refresh</button>
+              </div>
+          </div>
+        );
+    }
+
     render() {
         const { entity, useVars } = this.props;
         return (
             <div>
                 <input type="hidden" name={`${entity}[body]`} value={this.getFullBody()} />
                 { this.renderBody() }
+                <br />
                 <input type="file" onChange={(event) => this.addImage(event.target.files[0]) } />
+                <hr />
                 { this.renderPreview() }
                 <hr />
                 { useVars ? this.renderVarsController() : null }
