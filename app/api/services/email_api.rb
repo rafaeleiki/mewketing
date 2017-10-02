@@ -1,7 +1,7 @@
 require 'net/smtp'
 
 module Services
-  class Email < Grape::API
+  class EmailAPI < Grape::API
     version 'v1', using: :header, vendor: 'email'
     content_type :json, 'application/json;charset=utf-8'
 

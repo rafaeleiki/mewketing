@@ -1,8 +1,9 @@
-<p id="notice"><%= notice %></p>
+<%= snackbar_notifications(notice, alert).html_safe %>
 
-<h1>Emails</h1>
 
-<table>
+<h1 class="<%= get_style_classes('h1-title')%>" >Emails</h1>
+
+<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
   <thead>
     <tr>
       <th>Schedule</th>
@@ -19,11 +20,12 @@
       <tr>
         <td><%= email.schedule %></td>
         <td><%= email.title %></td>
-        <td><%= email.body %></td>
         <td><%= email.sender.email %></td>
-        <td><%= link_to 'Show', email %></td>
-        <td><%= link_to 'Edit', edit_email_path(email) %></td>
-        <td><%= link_to 'Destroy', email, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= email.groups.map { |g| g.name }.join(', ') %></td>
+        <td><%= email.sent? ? 'yes' : 'no' %></td>
+        <td><%= link_to 'Show', email, class:get_style_classes('btn-show') %></td>
+        <td><%= link_to 'Edit', edit_email_path(email), class:get_style_classes('btn-edit') %></td>
+        <td><%= link_to 'Destroy', email, method: :delete, data: { confirm: 'Are you sure?' }, class:get_style_classes('btn-destroy') %></td>
       </tr>
     <% end %>
   </tbody>
@@ -31,4 +33,4 @@
 
 <br>
 
-<%= link_to 'New Email', new_email_path %>
+<%= link_to 'New Email', new_email_path, class:get_style_classes('btn-new') %>

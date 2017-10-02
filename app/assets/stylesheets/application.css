@@ -29,3 +29,27 @@ body {
 .page-content:not(.container) {
     padding: 1em;
 }
+
+.mdl-textarea__input {
+  border: 1px solid rgba(0,0,0, 0.12);
+  padding: 4px;
+}
+
+form div.field {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  width:500px;
+}
+
+form .actions {
+  float: right;
+}
+
+/*div.actions-vars button{
+  position: relative !important;
+}*/
+
+div.mdl-textarea {
+  width: 100%;
+}

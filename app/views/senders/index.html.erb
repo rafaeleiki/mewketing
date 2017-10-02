@@ -1,29 +1,28 @@
-<p id="notice"><%= notice %></p>
+<%= snackbar_notifications(notice, alert).html_safe %>
 
-<h1>Senders</h1>
+<h1 class="<%= get_style_classes('h1-title')%>" >Senders</h1>
 
-<table>
+<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
   <thead>
     <tr>
-      <th>Email</th>
-      <th>Admin</th>
-      <th>Client</th>
-      <th colspan="3"></th>
+      <th class="mdl-data-table__cell--non-numeric">Email</th>
+      <th class="mdl-data-table__cell--non-numeric">Client</th>
+      <th class="mdl-data-table__cell--non-numeric" colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @senders.each do |sender| %>
+      <% if sender.admin %>
+      <tr class="admin">
+      <% else %>
       <tr>
+      <% end %>
         <td><%= sender.email %></td>
-        <td><%= sender.admin %></td>
         <td><%= sender.client.name %></td>
-        <td><%= link_to 'Show', sender %></td>
-        <td><%= link_to 'Edit', edit_sender_path(sender) %></td>
-        <td><%= current_user.admin ?
-                  link_to('Destroy', sender, method: :delete, data: { confirm: 'Are you sure?' })
-                  : ''
-                %></td>
+        <td><%= link_to 'Show', sender, class:get_style_classes('btn-show') %></td>
+        <td><%= link_to 'Edit', edit_sender_path(sender), class: get_style_classes('btn-edit') %></td>
+        <td><%= link_to 'Destroy', sender, method: :delete, data: { confirm: 'Are you sure?' }, class: get_style_classes('btn-destroy') %></td>
       </tr>
     <% end %>
   </tbody>
@@ -31,4 +30,4 @@
 
 <br>
 
-<%= link_to 'New Sender', new_sender_path %>
+<%= link_to 'New Sender', new_sender_path, class: get_style_classes('btn-new') %>

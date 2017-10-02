@@ -11,19 +11,24 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name, id: :group_name %>
+  <div class="field <%= get_style_classes('form-input-div') %>">
+    <%= form.label :name, class: get_style_classes('form-label-text-input') %>
+    <%= form.text_field :name, id: :group_name, class: get_style_classes('form-text-input') %>
   </div>
+  <br />
 
-  <div class="field">
-    <%= form.label :private %>
-    <%= form.check_box :private, id: :group_private %>
+  <div class="field <%= get_style_classes('form-input-div') %>">
+    <%= form.label :private, class: get_style_classes('form-label-checkbox-input') do %>
+      <%= form.check_box :private, id: :group_private, class: get_style_classes('form-checkbox-input'), checked: true %>
+      <span class="field <%= get_style_classes('form-span-label-checkbox-input') %>">Private</span><!-- TODO: Tirar esse label hardcoded -->
+    <% end %>
   </div>
+  <br />
 
   <%= react_component('GroupRelationSelector', { id: group.id }) %>
+  <br />
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit :class => get_style_classes('form-submit') %>
   </div>
 <% end %>

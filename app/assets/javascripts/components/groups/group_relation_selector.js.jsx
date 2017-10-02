@@ -15,17 +15,17 @@ class GroupRelationSelector extends React.Component {
   }
 
   renderNewRelation(data, key, controllers, className = '') {
-    return (<li key={key} className={`row ${className}`}>
-      <label className="relation-label col-sm-1"></label>
-      <label className="relation-label col-sm-4">{ data.title }</label>
+    return (<li key={key} className={`mdl-list__item ${className}`}>
+      <i className="relation-label mdl-list__item-avatar material-icons" style={{opacity:0}}></i>
+      <span className="relation-label mdl-list__item-primary-content">{ data.title }</span>
       { controllers.ADD(key) }
     </li>);
   }
 
   renderPersistedRelation(data, key, controllers, className) {
-    return (<li key={key} className={`row persisted ${className}`}>
-      <label className="relation-label col-sm-1">Save</label>
-      <label className="relation-label col-sm-4">{ data.title }</label>
+    return (<li key={key} className={`mdl-list__item persisted ${className}`}>
+      <i className="relation-label mdl-list__item-avatar material-icons">check</i>
+      <span className="relation-label  mdl-list__item-primary-content">{ data.title }</span>
       { controllers.DELETE(key) }
     </li>);
   }

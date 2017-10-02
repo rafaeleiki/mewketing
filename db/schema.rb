@@ -45,7 +45,6 @@ ActiveRecord::Schema.define(version: 20170929131219) do
     t.datetime "updated_at", null: false
     t.boolean "enabled", default: true
     t.boolean "sent"
-    t.boolean "enabled", default: true
     t.jsonb "vars", default: "{}"
     t.index ["sender_id"], name: "index_emails_on_sender_id"
   end
@@ -94,8 +93,13 @@ ActiveRecord::Schema.define(version: 20170929131219) do
     t.bigint "sender_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "enabled", default: true
     t.index ["sender_id"], name: "index_templates_on_sender_id"
+  end
+
+  create_table "tests", force: :cascade do |t|
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "email_groups", "emails"

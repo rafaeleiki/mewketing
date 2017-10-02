@@ -1,4 +1,7 @@
 class Email < ApplicationRecord
+  include BodyImageAttachable
+  include Activatable
+
   belongs_to :sender
   has_many :email_groups
   has_many :groups, :through => :email_groups
@@ -10,15 +13,6 @@ class Email < ApplicationRecord
 
   # Custom validations
   validate :valid_vars
-
-  # Scopes
-  scope :active, -> {where(enabled: true)}
-  scope :inactive, -> {where(enabled: false)}
-
-  # Include the management of the enabled flag
-  def destroy
-    update(enabled: false)
-  end
 
   scope :sent, -> { where(sent: true) }
   scope :not_sent, -> { where(sent: false) }
@@ -34,7 +28,8 @@ class Email < ApplicationRecord
   end
 
   def body_with_vars(email)
-    text = body
+    text = body_without_images
+
     if vars.present? && vars != '{}'
       vars['values'].each do |data|
         if data['email'] == email
@@ -68,14 +63,16 @@ class Email < ApplicationRecord
 
   def vars_values_validation
     valid = true
-    vars['vars'].each do |variable|
-      var_found = false
-      vars['values'].each do |data_line|
-        var_found = data_line.key? variable
-        break if var_found
+    if !vars['values'].empty?
+      vars['vars'].each do |variable|
+        var_found = false
+        vars['values'].each do |data_line|
+          var_found = data_line.key? variable
+          break if var_found
+        end
+        valid = var_found
+        break if !valid
       end
-      valid = var_found
-      break if !valid
     end
 
     if !valid

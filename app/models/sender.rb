@@ -1,4 +1,6 @@
 class Sender < ApplicationRecord
+  include Activatable
+
   belongs_to :client
   has_many :groups
   has_many :emails
@@ -9,6 +11,8 @@ class Sender < ApplicationRecord
   # Scopes
   scope :active, -> {where(enabled: true)}
   scope :inactive, -> {where(enabled: false)}
+  scope :admin, -> {where(admin: true)}
+  scope :removable, -> {where(admin: false)}
 
   # Include the management of the enabled flag
   def destroy
