@@ -40,7 +40,7 @@
     <%= react_component('VarsTable', {
           text: email.body.nil? ? '' : email.body,
           values: no_vars ? [] : email.vars['values'],
-          defaultVars: (no_vars || email.vars['vars'].index('email').nil?) ? ['email'] : [],
+          defaultVars: ['email'],
           useVars: true,
           entity: 'email'
         })
