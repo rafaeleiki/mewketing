@@ -24,6 +24,11 @@
   </div>
   <br />
 
+  <div class="field">
+    <%= form.label :groups %>
+    <%= react_component('EmailRelationSelector', { id: email.id }) %>
+  </div>
+
   <div class="field <%= get_style_classes('form-input-div') %>">
     <%= form.label :title, class: get_style_classes('form-label-text-input') %>
     <%= form.text_field :title, id: :email_title, class: get_style_classes('form-text-input') %>
