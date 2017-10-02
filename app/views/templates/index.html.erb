@@ -6,7 +6,6 @@
   <thead>
     <tr>
       <th>Title</th>
-      <th>Body</th>
       <th>Sender</th>
       <th colspan="3"></th>
     </tr>
@@ -16,7 +15,6 @@
     <% @templates.each do |template| %>
       <tr>
         <td><%= template.title %></td>
-        <td><%= template.body %></td>
         <td><%= template.sender.email %></td>
         <td><%= link_to 'Show', template, class:get_style_classes('btn-show') %></td>
         <td><%= link_to 'Edit', edit_template_path(template), class:get_style_classes('btn-edit') %></td>
