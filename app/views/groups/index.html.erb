@@ -13,7 +13,7 @@
   </thead>
 
   <tbody>
-    <% @groups.each do |group| %>
+    <% @groups.active.each do |group| %>
       <tr>
         <td><%= group.name %></td>
         <td><%= group.private %></td>
