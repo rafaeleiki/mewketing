@@ -7,7 +7,7 @@ class ReceiversController < ApplicationController
   # GET /receivers
   # GET /receivers.json
   def index
-    @receivers = current_user.client.receivers
+    @receivers = current_user.client.receivers.active
   end
 
   def add_to_group_show
