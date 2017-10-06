@@ -1,7 +1,6 @@
 class SessionsController < ApplicationController
 
   def new
-      @errors = []
   end
 
   def create
@@ -9,7 +8,7 @@ class SessionsController < ApplicationController
     respond_to do |format|
         if user && user.authenticate(params[:password])
           session[:sender_id] = user.id
-          redirect_to '/'
+          format.html {redirect_to '/'}
         else
           format.html { redirect_to '/login', notice: 'User and password doens\'t match' }
           format.json { render json: {errors: ['User and Pass doens\'t match']}, status: :unprocessable_entity }
