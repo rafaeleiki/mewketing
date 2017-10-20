@@ -40,10 +40,10 @@ module Services
       end
       post :add do
         r = Receiver.active.find_by(sender: @user, name: params[:name])
-        error!("Record already created") if !r.nil?
+        error!("Receiver already created") if !r.nil?
         r = Receiver.create(@q_params)
         error!("Internal error") if r.nil?
-        return r
+        return {"status":"Receiver created"}
       end
 
       desc 'Read some receivers'
@@ -73,11 +73,11 @@ module Services
       end
       post :update do
         r = Receiver.active.find_by(sender: @user, name: params[:original_name])
-        error!("Record not found") if r.nil?
+        error!("Receiver not found") if r.nil?
         rn = Receiver.active.find_by(sender: @user, name: params[:name])
-        error!("There is already a record with this name") if !rn.nil?
+        error!("There is already a receiver with this name") if !rn.nil?
         r.update(@q_params)
-        return r
+        return {"status":"Receiver updated"}
       end
 
       desc 'Remove one '
@@ -87,9 +87,9 @@ module Services
       end
       post :remove do
         g = Receiver.active.find_by(@q_params)
-        error!("Record not found") if g.nil?
+        error!("Receiver not found") if g.nil?
         error!("Internal error") if !g.destroy
-        return {"status":"Record removed"}
+        return {"status":"Receiver removed"}
       end
     end
   end

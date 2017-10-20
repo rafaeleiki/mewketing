@@ -40,10 +40,10 @@ module Services
       end
       post :add do
         g = Group.active.find_by(sender: @user, name: params[:name])
-        error!("Record already created") if !g.nil?
+        error!("Group already created") if !g.nil?
         g = Group.create(@q_params)
         error!("Internal error") if g.nil?
-        return g
+        return {"status":"Group created"}
       end
 
       desc 'Read some group'
@@ -73,11 +73,11 @@ module Services
       end
       post :update do
         g = Group.active.find_by(sender: @user, name: params[:original_name])
-        error!("Record not found") if g.nil?
+        error!("Group not found") if g.nil?
         gn = Group.active.find_by(sender: @user, name: params[:name])
-        error!("There is already a record with this name") if !gn.nil?
+        error!("There is already a group with this name") if !gn.nil?
         g.update(@q_params)
-        return g
+        return {"status":"Group updated"}
       end
 
       desc 'Remove one '
@@ -87,9 +87,9 @@ module Services
       end
       post :remove do
         g = Group.active.find_by(@q_params)
-        error!("Record not found") if g.nil?
+        error!("Group not found") if g.nil?
         error!("Internal error") if !g.destroy
-        return {"status":"Record removed"}
+        return {"status":"Group removed"}
       end
 
       # Receivers management

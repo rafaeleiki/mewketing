@@ -131,7 +131,7 @@ module Services
       end
       post :remove do
         e = Email.active.not_sent.find_by(@q_params)
-        error!("Record not found") if e.nil?
+        error!("Email not found") if e.nil?
         error!("Internal error") if !e.destroy
         return {"status":"Email removed"}
       end

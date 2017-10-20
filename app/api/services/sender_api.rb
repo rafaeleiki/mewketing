@@ -41,12 +41,12 @@ module Services
       post :add do
         error!("Unauthorized") if !@user.admin
         s = Sender.active.find_by(@q_params)
-        error!("Record already created") if !s.nil?
+        error!("Sender already created") if !s.nil?
         @q_params[:admin] = false
         @q_params[:password] = params[:password]
         s = Sender.new(@q_params)
         error!("Internal error") if !s.save
-        return s
+        return {"status":"Sender created"}
       end
 
       desc 'Read some senders'
@@ -76,13 +76,13 @@ module Services
       end
       post :update do
         s = Sender.active.find_by(client: @user.client, email: params[:original_email])
-        error!("Record not found") if s.nil?
+        error!("Sender not found") if s.nil?
         error!("Unauthorized") if !(@user.admin || @user == s)
         sn = Sender.active.find_by(client: @user.client, email: params[:email])
-        error!("There is already a record with this email") if !sn.nil?
+        error!("There is already a sender with this email") if !sn.nil?
         @q_params[:password] = params[:password] if params[:password] != ""
         s.update(@q_params)
-        return s
+        return {"status":"Sender updated"}
       end
 
       desc 'Remove one '
@@ -93,9 +93,9 @@ module Services
       post :remove do
         error!("Unauthorized") if !@user.admin
         s = Sender.active.find_by(@q_params)
-        error!("Record not found") if s.nil?
+        error!("Sender not found") if s.nil?
         error!("Internal error") if !s.destroy
-        return {"status":"Record removed"}
+        return {"status":"Sender removed"}
       end
     end
   end

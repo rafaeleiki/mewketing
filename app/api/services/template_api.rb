@@ -40,10 +40,10 @@ module Services
       end
       post :add do
         t = Template.find_by(sender: @user, title: params[:title])
-        error!("Record already created") if !t.nil?
+        error!("Template already created") if !t.nil?
         t = Template.create(@q_params)
         error!("Internal error") if t.nil?
-        return t
+        return {"status":"Template created"}
       end
 
       desc 'Read some templates'
@@ -72,11 +72,11 @@ module Services
       end
       post :update do
         t = Template.find_by(sender: @user, title: params[:original_title])
-        error!("Record not found") if t.nil?
+        error!("Template not found") if t.nil?
         rn = Template.find_by(sender: @user, title: params[:title])
-        error!("There is already a record with this title") if !rn.nil?
+        error!("There is already a template with this title") if !rn.nil?
         t.update(@q_params)
-        return t
+        return {"status":"Template updated"}
       end
 
       desc 'Remove one '
@@ -86,9 +86,9 @@ module Services
       end
       post :remove do
         g = Template.find_by(@q_params)
-        error!("Record not found") if g.nil?
+        error!("Template not found") if g.nil?
         error!("Internal error") if !g.destroy
-        return {"status":"Record removed"}
+        return {"status":"Template removed"}
       end
     end
   end
