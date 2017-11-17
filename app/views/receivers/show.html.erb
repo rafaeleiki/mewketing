@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+<%= snackbar_notifications(notice, alert).html_safe %>
 
 <p>
   <strong>Name:</strong>
@@ -15,5 +15,5 @@
   <%= @receiver.sender.email %>
 </p>
 
-<%= link_to 'Edit', edit_receiver_path(@receiver) %> |
-<%= link_to 'Back', receivers_path %>
+<%= link_to 'Edit', edit_receiver_path(@receiver), class: get_style_classes('btn-edit') %> |
+<%= link_to 'Back', receivers_path, class: get_style_classes('btn-back') %>

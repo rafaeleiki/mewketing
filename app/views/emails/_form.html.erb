@@ -11,42 +11,50 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :template %>
+  <div class="field <%= get_style_classes('form-select-div') %>">
     <%= form.select :template,
-                    options_for_select(@templates.map { |t| [t.title, t.body] }),
+                    options_for_select(@templates.map { |t| [t.title, t.body_without_images] }),
                     { include_blank: true },
-                    :id => :email_template
+                    :id => :email_template,
+                    :class => get_style_classes('form-select-input')
     %>
+    <div class="mdl-selectfield__icon"><i class="material-icons">arrow_drop_down</i></div>
+    <%= form.label :template, class: get_style_classes('form-label-select-input') %>
     <p id="empty_template" style="display: none;">Warning: this template is empty.</p>
   </div>
-
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title, id: :email_title %>
-  </div>
+  <br />
 
   <div class="field">
     <%= form.label :groups %>
     <%= react_component('EmailRelationSelector', { id: email.id }) %>
   </div>
 
+  <div class="field <%= get_style_classes('form-input-div') %>">
+    <%= form.label :title, class: get_style_classes('form-label-text-input') %>
+    <%= form.text_field :title, id: :email_title, class: get_style_classes('form-text-input') %>
+  </div>
+  <br />
+
   <div class="field">
-    <%= form.label :body %>
     <% no_vars = email.vars.nil? || email.vars == '{}' %>
     <%= react_component('VarsTable', {
-        text: email.body.nil? ? '' : email.body,
-        values: no_vars ? [] : email.vars['values'],
-        defaultVars: no_vars ? ['email'] : email.vars['vars'] })
+          text: email.body.nil? ? '' : email.body,
+          values: no_vars ? [] : email.vars['values'],
+          defaultVars: no_vars ? ['email'] : email.vars['vars'],
+          useVars: true,
+          entity: 'email'
+        })
     %>
   </div>
+  <br />
 
   <div class="field">
-    <%= form.label :schedule %>
-    <%= form.datetime_select :schedule, id: :email_schedule %>
+    <%= form.label :schedule, class: get_style_classes('form-label-input') %>
+    <%= form.datetime_select :schedule, {with_css_classes:true}, {class: get_style_classes('form-datetime_select-input')}%>
   </div>
+  <br />
 
   <div class="actions">
-    <%= form.submit 'Enviar email' %>
+    <%= form.submit 'Enviar email', class: get_style_classes('form-submit') %>
   </div>
 <% end %>

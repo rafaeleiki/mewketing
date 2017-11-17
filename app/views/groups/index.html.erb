@@ -1,8 +1,8 @@
-<p id="notice"><%= notice %></p>
+<%= snackbar_notifications(notice, alert).html_safe %>
 
-<h1>Groups</h1>
+<h1 class="<%= get_style_classes('h1-title')%>" >Groups</h1>
 
-<table>
+<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
   <thead>
     <tr>
       <th>Name</th>
@@ -18,9 +18,9 @@
         <td><%= group.name %></td>
         <td><%= group.private %></td>
         <td><%= group.sender.email %></td>
-        <td><%= link_to 'Show', group %></td>
-        <td><%= link_to 'Edit', edit_group_path(group) %></td>
-        <td><%= link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', group, class:get_style_classes('btn-show') %></td>
+        <td><%= link_to 'Edit', edit_group_path(group), class: get_style_classes('btn-edit') %></td>
+        <td><%= link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' }, class: get_style_classes('btn-destroy') %></td>
       </tr>
     <% end %>
   </tbody>
@@ -28,4 +28,4 @@
 
 <br>
 
-<%= link_to 'New Group', new_group_path %>
+<%= link_to 'New Group', new_group_path, class: get_style_classes('btn-new') %>

@@ -13,6 +13,7 @@ class EmailsController < ApplicationController
   # GET /emails/1
   # GET /emails/1.json
   def show
+    redirect_to '/emails/not_email' unless @email.sender.client == current_user.client
   end
 
   # GET /emails/new
@@ -126,12 +127,12 @@ class EmailsController < ApplicationController
 
     def vars_params
       vars = []
-      params[:vars].each_pair do |key, value|
+      params.key?(:vars) && params[:vars].each_pair do |key, value|
         vars << value
       end
 
       values = []
-      params[:vars_values].each_pair do |key, value|
+      params.key?(:vars_values) && params[:vars_values].each_pair do |key, value|
         values << value.permit!
       end
 

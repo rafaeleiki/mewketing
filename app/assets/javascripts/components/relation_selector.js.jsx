@@ -68,7 +68,7 @@ class RelationSelector extends React.Component {
   }
 
   getDeleteController(index) {
-    return (<button type="button" onClick={() => this.remove(index)} className="btn btn-secondary">
+    return (<button type="button" onClick={() => this.remove(index)} className="btn btn-secondary mdl-list__item-secondary-action mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
       Remove
     </button>);
   }
@@ -81,7 +81,7 @@ class RelationSelector extends React.Component {
   }
 
   getAddController(index) {
-    return (<button type="button" onClick={() => this.persist(index)} className="btn btn-secondary">
+    return (<button type="button" onClick={() => this.persist(index)} className="btn btn-secondary mdl-list__item-secondary-action mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
       Add
     </button>);
   }
@@ -141,11 +141,16 @@ class RelationSelector extends React.Component {
     const hiddenAttributes = this.hiddenAttributes();
     return (
       <div>
-        <input type="search"
-               onChange={(event) => this.search(event.target.value)}
-               onKeyDown={(event) => event.keyCode === 13 && event.preventDefault()}
-        />
-        <ul className="relation-list">{relationList}</ul>
+        <div className="mdl-textfield mdl-js-textfield  mdl-textfield--align-right relation-search">
+          <label className="mdl-button mdl-js-button mdl-button--icon" htmlFor="search">
+            <i className="material-icons">search</i>
+          </label>
+          <input type="search" name="search"
+                 onChange={(event) => this.search(event.target.value)}
+                 onKeyDown={(event) => event.keyCode === 13 && event.preventDefault()}
+                 className="mdl-textfield__input" />
+        </div>
+        <ul className="relation-list mdl-list">{relationList}</ul>
         { hiddenAttributes }
       </div>
     );

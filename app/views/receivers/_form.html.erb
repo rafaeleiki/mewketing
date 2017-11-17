@@ -11,17 +11,19 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name, id: :receiver_name %>
+  <div class="field <%= get_style_classes('form-input-div') %>">
+    <%= form.label :name, class: get_style_classes('form-label-text-input') %>
+    <%= form.text_field :name, id: :receiver_name, class: get_style_classes('form-text-input') %>
   </div>
+  <br />
 
-  <div class="field">
-    <%= form.label :email %>
-    <%= form.text_field :email, id: :receiver_email %>
+  <div class="field <%= get_style_classes('form-input-div') %>">
+    <%= form.label :email, class: get_style_classes('form-label-text-input') %>
+    <%= form.text_field :email, id: :receiver_email, class: get_style_classes('form-text-input') %>
   </div>
+  <br />
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class: get_style_classes('form-submit') %>
   </div>
 <% end %>

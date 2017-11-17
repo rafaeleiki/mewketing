@@ -3,19 +3,20 @@
   <header class="mdl-layout__header">
     <div class="mdl-layout__header-row">
       <div class="mdl-layout-spacer"></div>
-      <!--
-      <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
-                  mdl-textfield--floating-label mdl-textfield--align-right">
-        <label class="mdl-button mdl-js-button mdl-button--icon"
-               for="fixed-header-drawer-exp">
+
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right">
+        <!-- <label class="mdl-button mdl-js-button mdl-button--icon" for="fixed-header-drawer-exp">
           <i class="material-icons">search</i>
         </label>
         <div class="mdl-textfield__expandable-holder">
-          <input class="mdl-textfield__input" type="text" name="sample"
-                 id="fixed-header-drawer-exp">
-        </div>
+          <input class="mdl-textfield__input" type="text" name="sample" id="fixed-header-drawer-exp">
+        </div> -->
+            <% if current_user %>
+                <b>Logged as: </b>
+                <%= current_user.email %>
 
-      </div>-->
+            <% end %>
+      </div>
 
     </div>
   </header>
@@ -30,7 +31,9 @@
       <a class="mdl-navigation__link" href="/templates">Templates</a>
       <a class="mdl-navigation__link" href="/emails">Emails</a>
       <% if current_user %>
-      <a class="mdl-navigation__link" href="/logout">Logout</a>
+      <a class="mdl-navigation__link" href="/logout">Logout <i class="material-icons">exit_to_app</i></a>
+      <% else %>
+      <a class="mdl-navigation__link" href="/login">Login</a>
       <% end %>
 
     </nav>

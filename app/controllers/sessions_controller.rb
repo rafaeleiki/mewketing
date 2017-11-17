@@ -5,11 +5,14 @@ class SessionsController < ApplicationController
 
   def create
     user = Sender.find_by_email(params[:email])
-    if user && user.authenticate(params[:password])
-      session[:sender_id] = user.id
-      redirect_to '/'
-    else
-      redirect_to '/login'
+    respond_to do |format|
+        if user && user.authenticate(params[:password])
+          session[:sender_id] = user.id
+          format.html {redirect_to '/'}
+        else
+          format.html { redirect_to '/login', notice: 'User and password doens\'t match' }
+          format.json { render json: {errors: ['User and Pass doens\'t match']}, status: :unprocessable_entity }
+        end
     end
   end
 
