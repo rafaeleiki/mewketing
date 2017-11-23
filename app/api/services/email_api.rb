@@ -7,7 +7,7 @@ module Services
 
     # Actions to be performed before all api responses
     before {
-      authorize(params[:sender_email], params[:sender_pass])
+      authorize(params[:sender_email], params[:sender_password])
       get_params(params)
     }
 
@@ -25,7 +25,7 @@ module Services
 
       def get_params(params)
         @q_params = {sender: @user}
-        params.except(:sender_email, :sender_pass, :groups, :template).each_pair do |key, value|
+        params.except(:sender_email, :sender_password, :groups, :template).each_pair do |key, value|
           @q_params[key] = value unless value.nil?
         end
       end
