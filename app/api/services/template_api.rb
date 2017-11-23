@@ -17,7 +17,7 @@ module Services
       end
 
       def authorize(email, pass)
-        puts pass
+        puts ("Senha:" + pass)
         @user = Sender.active.find_by_email(email)
         error!("Unauthorized") if !(@user && @user.authenticate(pass))
       end
