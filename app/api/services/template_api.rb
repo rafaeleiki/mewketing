@@ -5,7 +5,7 @@ module Services
 
     # Actions to be performed before all api responses
     before {
-      authorize(params[:sender_email], params[:sender_pass])
+      authorize(params[:sender_email], params[:sender_password])
       get_params(params)
     }
 
@@ -13,17 +13,18 @@ module Services
     helpers do
       params :credentials do
         requires :sender_email, type: String, desc: 'Sender email for authentication'
-        requires :sender_pass, type: String, desc: 'Sender pass for authentication'
+        requires :sender_password, type: String, desc: 'Sender pass for authentication'
       end
 
       def authorize(email, pass)
+        puts ("Senha:" + pass)
         @user = Sender.active.find_by_email(email)
         error!("Unauthorized") if !(@user && @user.authenticate(pass))
       end
 
       def get_params(params)
         @q_params = {sender: @user}
-        params.except(:sender_email, :sender_pass, :original_title).each_pair do |key, value|
+        params.except(:sender_email, :sender_password, :original_title).each_pair do |key, value|
           @q_params[key] = value unless value.nil?
         end
       end
