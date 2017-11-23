@@ -10,5 +10,5 @@ use Rack::Cors do
   end
 end
 
-run API::Services
+# run API::Services
 run Rails.application
