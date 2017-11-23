@@ -15,7 +15,7 @@ module Services
     helpers do
       params :credentials do
         requires :sender_email, type: String, desc: 'Sender email for authentication'
-        requires :sender_pass, type: String, desc: 'Sender pass for authentication'
+        requires :sender_password, type: String, desc: 'Sender pass for authentication'
       end
 
       def authorize(email, pass)
