@@ -43,6 +43,14 @@ module Services
         error!("Receiver already created") if !r.nil?
         r = Receiver.create(@q_params)
         error!("Internal error") if r.nil?
+
+        puts ("name: " + params[:name])
+        g = Group.create(sender: @user, name: params[:name], private: true)
+        error!("Internal error") if g.nil?
+
+        gr = GroupReceiver.create(group: g, receiver: r)
+        error!("Internal error") if gr.nil?
+
         return {"status":"Receiver created"}
       end
 
@@ -76,7 +84,15 @@ module Services
         error!("Receiver not found") if r.nil?
         rn = Receiver.active.find_by(sender: @user, name: params[:name])
         error!("There is already a receiver with this name") if !rn.nil?
+
+        if params.key?(:name)
+            g = Group.active.find_by(name: params[:original_name])
+            error!("Internal error") if g.nil?
+            g.update(name: params[:name])
+        end
+
         r.update(@q_params)
+
         return {"status":"Receiver updated"}
       end
 
@@ -86,9 +102,15 @@ module Services
         requires :name, type: String, desc: 'Name of the receiver'
       end
       post :remove do
-        g = Receiver.active.find_by(@q_params)
-        error!("Receiver not found") if g.nil?
+        r = Receiver.active.find_by(@q_params)
+        error!("Receiver not found") if r.nil?
+
+        g = Group.active.find_by(name: params[:name])
+
+        error!("Internal error") if g.nil?
+        error!("Internal error") if !r.destroy
         error!("Internal error") if !g.destroy
+
         return {"status":"Receiver removed"}
       end
     end
