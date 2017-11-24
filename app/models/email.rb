@@ -46,7 +46,7 @@ class Email < ApplicationRecord
   def replace_vars(data)
     text = body
     data.each_pair do |variable, value|
-      text.gsub!("{{#{variable}}}", value)
+      text = text.gsub("{{#{variable}}}", value)
     end
     text
   end
