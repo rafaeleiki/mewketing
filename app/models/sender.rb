@@ -8,9 +8,6 @@ class Sender < ApplicationRecord
   has_many :receivers
   has_secure_password
 
-  # Scopes
-  scope :active, -> {where(enabled: true)}
-  scope :inactive, -> {where(enabled: false)}
   scope :admin, -> {where(admin: true)}
   scope :removable, -> {where(admin: false)}
 

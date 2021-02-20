@@ -116,7 +116,7 @@ class VarsTable extends React.Component {
         const { text } = this.state;
         const { entity } = this.props;
         return (
-            <div className="mdl-textfield mdl-js-textfield mdl-textarea">
+            <div>
                 <label className="mdl-textfield__label">Body</label>
                 <textarea value={text}
                           id={`${entity}_body`}
@@ -124,6 +124,38 @@ class VarsTable extends React.Component {
                           className="mdl-textfield__input mdl-textarea__input">
                 </textarea>
             </div>
+        );
+    }
+
+    renderPreview() {
+        return (
+            <div>
+                <label>Preview</label>
+                <div dangerouslySetInnerHTML={this.getPreviewHTML()}/>
+            </div>
+        );
+    }
+
+    renderVarsController() {
+        let { values, vars } = this.state;
+        return (
+          <div>
+              <table>
+                  <thead>
+                  <tr>{ vars.map((variable, i) => <th key={i}>{ variable }</th>) }</tr>
+                  </thead>
+                  <tbody>
+                  { values.map((dataLine, index) => this.renderLine(dataLine, index, vars)) }
+                  </tbody>
+              </table>
+              {
+                  vars.map((variable, i) =>
+                      <input type="hidden" name={ `vars[${i}]` } key={i} value={variable} />
+                  )
+              }
+              <button type="button" onClick={(event) => this.addDataLine()}>Add</button>
+              <button type="button" onClick={(event) => this.setState({ vars: this.getVars() })}>Refresh</button>
+          </div>
         );
     }
 
